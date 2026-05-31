@@ -6,10 +6,33 @@
   <meta property="og:description" content="Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://univers.ai">
-  <meta property="og:image" content="https://univers.ai/og-image.png">
+  <meta property="og:image" content="sprites/Logo univers sin fondo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://univers.ai/og-image.png">
+  <meta name="twitter:image" content="sprites/Logo univers sin fondo.png">
+  <meta name="description" content="Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites. Automatización omnicanal 24/7 para WhatsApp, Instagram y Facebook.">
+  <link rel="canonical" href="https://univers.ai/">
   <title>Univers - Agentes de IA para Ventas</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Univers",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Ecosistema de agentes de IA para automatización de ventas omnicanal.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Prueba gratuita de 14 días"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Univers",
+      "url": "https://univers.ai"
+    }
+  }
+  </script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
@@ -207,23 +230,170 @@
     }
     .sprite-wrap.loaded .loading-placeholder { display: none; }
     .sprite-wrap.error .loading-placeholder { border-color: rgba(255,100,100,0.4); color: rgba(255,100,100,0.7); }
+
+    /* ----- Skip Link ----- */
+    .skip-link {
+      position: absolute; top: -9999px; left: 0; z-index: 999998;
+      padding: 12px 24px; background: #5d5fef; color: #fff;
+      font-weight: 700; text-decoration: none; border-radius: 0 0 8px 0;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ----- Demo Modal ----- */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: rgba(29,32,35,0.95); backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px; padding: 40px; width: 90%; max-width: 480px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.3s ease;
+      position: relative; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,0.08); border: none; color: #fff;
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      font-size: 20px; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.15); }
+    .modal-content h2 {
+      font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 800;
+      margin-bottom: 8px; color: #fff;
+    }
+    .modal-content p.desc {
+      color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 28px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.7);
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .form-group input {
+      width: 100%; padding: 12px 16px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; font-size: 15px; outline: none; transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .form-group input:focus { border-color: #5d5fef; }
+    .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+    .modal-submit {
+      width: 100%; padding: 14px; border-radius: 9999px;
+      background: #5d5fef; color: #fff; font-weight: 700; font-size: 15px;
+      border: none; cursor: pointer; transition: filter 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .modal-submit:hover { filter: brightness(1.1); transform: scale(1.02); }
+    .modal-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; filter: none; }
+    .modal-success {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .modal-success.active { display: block; }
+    .modal-form { display: block; }
+    .modal-form.hidden { display: none; }
+    .modal-success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(93,95,239,0.15); display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 20px; font-size: 32px;
+    }
+    .modal-error {
+      color: #ff6b6b; font-size: 13px; margin-top: 12px; display: none;
+    }
+    .modal-error.active { display: block; }
+    .brand-spinner {
+      width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: #5d5fef; border-radius: 50%;
+      animation: brandSpin 0.8s linear infinite;
+      position: absolute; bottom: 30px;
+    }
+    @keyframes brandSpin { to { transform: rotate(360deg); } }
+    .brand-logo-wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+    .logo-fallback {
+      display: none; width: clamp(200px,28vw,360px); height: 80px;
+      background: rgba(255,255,255,0.06); border-radius: 12px;
+      align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4); font-family: 'Sora', sans-serif;
+      font-weight: 800; font-size: 28px;
+    }
+    .logo-fallback.active { display: flex; }
+    .logo-fallback.nav-fallback {
+      width: 48px; height: 48px; font-size: 16px; border-radius: 8px;
+    }
+
+    /* ----- Hamburger / Mobile Drawer ----- */
+    .hamburger-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 8px; color: #fff; width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+    }
+    .hamburger-btn svg { width: 24px; height: 24px; }
+    .mobile-drawer {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 99998;
+      background: rgba(29,32,35,0.97); backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 80px 24px 32px; transform: translateY(-120%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: none;
+    }
+    .mobile-drawer.active { transform: translateY(0); }
+    .mobile-drawer a {
+      display: block; padding: 14px 0; font-size: 16px; font-weight: 700;
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .mobile-drawer a:hover { color: #c1c1ff; }
+    .mobile-drawer-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,0.08); border: none; color: #fff;
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      font-size: 20px; display: flex; align-items: center; justify-content: center;
+    }
+    .drawer-overlay {
+      position: fixed; inset: 0; z-index: 99997;
+      background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease; display: none;
+    }
+    .drawer-overlay.active { opacity: 1; pointer-events: auto; }
+
+    /* ----- Touch hover fix ----- */
+    @media (hover: hover) and (pointer: fine) {
+      .service-card { transition: all 0.3s ease; }
+      .service-card:hover { transform: scale(1.02) translateY(-4px); }
+    }
   </style>
 </head>
 <body class="font-sans text-on-background overflow-x-hidden min-h-screen">
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
   <!-- Brand reveal overlay -->
   <div id="brand-reveal" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:#111417;">
-    <img src="sprites/Logo univers sin fondo.png" alt="Univers" id="brand-logo" style="width:clamp(200px,28vw,360px);height:auto;">
+    <div class="brand-logo-wrap">
+      <img src="sprites/Logo univers sin fondo.png" alt="Univers" id="brand-logo" style="width:clamp(200px,28vw,360px);height:auto;" onerror="this.style.display='none';document.getElementById('brand-fallback').classList.add('active');">
+      <div class="logo-fallback" id="brand-fallback">Univers</div>
+      <div class="brand-spinner" id="brand-spinner"></div>
+    </div>
   </div>
   <!-- Full-page background overlay -->
   <div class="fixed inset-0 w-full h-full pointer-events-none z-0" style="background-image: url('sprites/descarga (2).webp'); background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.15;"></div>
 
 <!-- BEGIN: Static Navigation -->
-<nav class="w-full px-4 sm:px-6 transition-opacity duration-300 py-4" id="static-nav">
+<nav class="w-full px-4 sm:px-6 transition-opacity duration-300 py-4" id="static-nav" role="navigation" aria-label="Navegación principal">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <div class="logo-transition-container">
         <!-- REPLACE: Tu isotype real -->
-        <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-12 w-auto">
+        <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-12 w-auto" onerror="this.style.display='none';document.getElementById('nav-logo-fallback')?.classList.add('active');">
+        <div class="logo-fallback nav-fallback" id="nav-logo-fallback">U</div>
         <div class="logo-text-wrapper">
           <div class="w-px bg-white/20 h-6"></div>
           <span class="font-headline text-white text-xl tracking-[0.25em] uppercase font-extralight">Univers</span>
@@ -237,19 +407,26 @@
       <a class="hover:text-primary transition-colors" href="#faq">FAQ</a>
     </div>
     <div class="flex items-center gap-6 h-full items-stretch">
-      <div class="flex items-center gap-4">
-        <a class="text-white/80 hover:text-white transition-colors flex items-center justify-center h-full self-center" href="#">
-          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.579.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
-        </a>
-        <a class="text-white/80 hover:text-white transition-colors flex items-center justify-center h-full self-center" href="#">
-          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A11.944 11.944 0 0 0 0 11.944c0 6.598 5.346 11.944 11.944 11.944 6.598 0 11.944-5.346 11.944-11.944C23.888 5.346 18.542 0 11.944 0zm6.02 8.006c-.174.738-1.24 6.66-1.79 9.104-.222.99-.654 1.322-1.074 1.354-.912.072-1.604-.6-2.486-1.176-.864-.564-1.518-.918-2.46-1.476-1.092-.648-.384-1.074.642-1.758.258-.174 2.004-1.824 2.874-2.682.06-.06.12-.174.066-.282-.054-.108-.192-.084-.282-.066-.132.024-2.28 1.44-6.456 4.272-.66.462-1.26.684-1.8.672-.552-.012-1.506-.282-2.244-.54-.9-.312-1.584-.48-1.536-1.008.036-.276.36-.552.972-.858 4.14-1.854 6.912-3.084 8.298-3.69 3.954-1.728 4.776-2.028 5.31-2.028.132 0 .396.03.564.18.144.132.186.306.198.468.012.18-.006.384-.03.6z"></path></svg>
-        </a>
-      </div>
-        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow" href="mailto:hola@univers.ai">Solicitar Demo</a>
+      <div class="flex items-center gap-4"></div>
+        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow demo-trigger" href="javascript:void(0)" data-cta="primary">Solicitar Demo</a>
+        <button class="hamburger-btn flex lg:hidden" id="hamburger-btn" aria-label="Abrir menú" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
     </div>
   </div>
 </nav>
 <!-- END: Static Navigation -->
+
+<!-- BEGIN: Mobile Drawer -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="mobile-drawer" id="mobile-drawer">
+  <button class="mobile-drawer-close" id="drawer-close" aria-label="Cerrar menú">✕</button>
+  <a href="#agentes" class="drawer-link">Agentes</a>
+  <a href="#precios" class="drawer-link">Precios</a>
+  <a href="#casos" class="drawer-link">Casos de Éxito</a>
+  <a href="#faq" class="drawer-link">FAQ</a>
+</div>
+<!-- END: Mobile Drawer -->
 
 <!-- BEGIN: Floating Navigation -->
 <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4" id="floating-nav">
@@ -265,20 +442,15 @@
       <a class="hover:text-primary transition-colors flex items-center" href="#casos">Casos de Éxito</a>
     </div>
     <div class="flex items-center gap-3 h-full items-stretch">
-      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center h-full self-center" href="#">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.579.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
-      </a>
-      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center h-full self-center" href="#">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0C5.346 0 0 5.346 0 11.944c0 6.598 5.346 11.944 11.944 11.944 6.598 0 11.944-5.346 11.944-11.944C23.888 5.346 18.542 0 11.944 0zm5.64 7.56c-.168 1.764-1.224 7.956-1.764 10.848-.228 1.224-.684 1.632-1.116 1.668-1.044.084-1.836-.708-2.844-1.368-1.572-1.032-2.46-1.668-3.984-2.676-1.764-1.164-.624-1.8 1.836-3.84 1.044-1.044 1.956-2.004 2.856-3.036.084-.096.168-.276.12-.336-.048-.06-.216-.048-.312-.024-.132.024-2.268 1.452-6.42 4.272-1.044.732-1.992 1.092-2.844 1.068-.936-.024-2.736-.528-4.068-.96-1.632-.528-2.928-.804-2.82-1.692.06-.468.684-.948 1.872-1.44 7.344-3.192 12.24-5.292 14.688-6.3.36-.156.708-.228 1.032-.216.48.012 1.044.276 1.416.36.312.072.588.228.744.408.156.192.216.396.192.612z"></path></svg>
-      </a>
-      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center" href="mailto:hola@univers.ai">Solicitar Demo</a>
+      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center demo-trigger" href="javascript:void(0)" data-cta="primary">Solicitar Demo</a>
     </div>
   </div>
 </div>
 <!-- END: Floating Navigation -->
 
+<main id="main-content">
 <!-- BEGIN: Hero Section -->
-<main class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 min-h-screen dot-grid bg-transparent flex items-center" data-parallax="0.15">
+<section class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 min-h-screen dot-grid bg-transparent flex items-center" data-parallax="0.15">
   <div class="max-w-7xl mx-auto w-full">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
       <div class="flex-1 z-20 text-center lg:text-left" data-parallax="0.08">
@@ -290,8 +462,8 @@
             Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites.
           </p>
           <div class="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
-            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40" href="#agentes">Ver Agentes</a>
-            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm" href="mailto:hola@univers.ai">Solicitar Demo</a>
+            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40" href="#agentes" data-cta="secondary">Ver Agentes</a>
+            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm demo-trigger" href="javascript:void(0)" data-cta="primary">Solicitar Demo</a>
           </div>
         </div>
       </div>
@@ -309,12 +481,12 @@
           </div>
         </div>
         <div class="absolute right-0 top-1/2 -translate-y-1/2 h-[85%] w-[90%] bg-gradient-to-br from-white to-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-0 rounded-2xl overflow-hidden">
-          <img src="sprites/Priority signals for urgent messages without panic.webp" class="w-full h-full object-cover blur-[2px] opacity-85">
+          <img src="sprites/Priority signals for urgent messages without panic.webp" class="w-full h-full object-cover blur-[2px] opacity-85" loading="lazy">
         </div>
       </div>
     </div>
   </div>
-</main>
+</section>
 <!-- END: Hero Section -->
 
 <!-- BEGIN: Transition Section -->
@@ -374,7 +546,7 @@
           <p class="text-4xl font-headline font-black text-green-400 mb-2"><span class="counter-value">100%</span></p>
           <p class="text-on-surface-variant font-medium">de tasa de respuesta automatizada con tono humano.</p>
         </div>
-        <a class="inline-flex items-center gap-4 bg-primary-container text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center" href="mailto:hola@univers.ai">
+        <a class="inline-flex items-center gap-4 bg-primary-container text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center demo-trigger" href="javascript:void(0)" data-cta="primary">
           Solicitar demo →
         </a>
       </div>
@@ -396,7 +568,7 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="services-grid">
         <!-- Service 1 -->
-        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">support_agent</span>
           </div>
@@ -404,7 +576,7 @@
           <p class="text-sm text-white/90 leading-relaxed">Soporte multilingüe 24/7 que resuelve dudas frecuentes y filtra leads calificados en segundos.</p>
         </div>
         <!-- Service 2 -->
-        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">event_available</span>
           </div>
@@ -412,7 +584,7 @@
           <p class="text-sm leading-relaxed text-white/90">Sincronización total con tu calendario para agendar, reprogramar y confirmar reuniones automáticamente.</p>
         </div>
         <!-- Service 3 -->
-        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">settings_suggest</span>
           </div>
@@ -420,7 +592,7 @@
           <p class="text-sm text-white/90 leading-relaxed">Diseñamos flujos de trabajo personalizados que conectan tus herramientas actuales con el poder de la IA.</p>
         </div>
         <!-- Service 4 -->
-        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">psychology</span>
           </div>
@@ -482,7 +654,7 @@
             <p class="">Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y evoluciona con cada interacción.</p>
           </div>
           <div class="mt-12">
-            <a class="inline-flex items-center gap-4 bg-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center" href="mailto:hola@univers.ai">
+            <a class="inline-flex items-center gap-4 bg-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center demo-trigger" href="javascript:void(0)" data-cta="primary">
               Solicitar demo →
             </a>
           </div>
@@ -492,7 +664,7 @@
             <div class="absolute inset-0 univers-gradient opacity-20 blur-2xl group-hover:opacity-30 transition-opacity"></div>
             <!-- REPLACE: Imagen editorial mockup -->
             <div class="overflow-hidden rounded-4xl lg:rounded-5xl shadow-3xl aspect-square bg-surface-container-low">
-              <img src="sprites/ROLE]_Act_as_a_world-class_202605291316.jpeg" class="w-full h-full object-cover">
+              <img src="sprites/ROLE]_Act_as_a_world-class_202605291316.jpeg" class="w-full h-full object-cover" loading="lazy">
             </div>
           </div>
         </div>
@@ -558,7 +730,7 @@
         <span class="font-headline font-bold text-lg text-white/70">Typebot</span>
         <span class="font-headline font-bold text-lg text-white/70">OpenAI</span>
       </div>
-       <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center" href="mailto:hola@univers.ai">Acceso Beta Limitado</a>
+       <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center demo-trigger" href="javascript:void(0)" data-cta="primary">Acceso Beta Limitado</a>
     </div>
 
     <!-- ❓ FAQ -->
@@ -617,24 +789,83 @@
 </section>
 <!-- END: The Capsule -->
 
+</main>
+<!-- END: #main-content -->
+
+<!-- BEGIN: Demo Modal -->
+<div class="modal-overlay" id="demo-modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close-btn" aria-label="Cerrar formulario">✕</button>
+    <div class="modal-form" id="modal-form">
+      <h2>Solicitar Demo</h2>
+      <p class="desc">Completá el formulario y nos pondremos en contacto para mostrarte cómo Univers puede transformar tu equipo de ventas.</p>
+      <form id="demo-form" novalidate>
+        <div class="form-group">
+          <label for="form-nombre">Nombre</label>
+          <input type="text" id="form-nombre" name="nombre" placeholder="Tu nombre completo" required>
+        </div>
+        <div class="form-group">
+          <label for="form-email">Email</label>
+          <input type="email" id="form-email" name="email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="form-empresa">Empresa</label>
+          <input type="text" id="form-empresa" name="empresa" placeholder="Nombre de tu empresa" required>
+        </div>
+        <button class="modal-submit" type="submit" id="modal-submit-btn">Enviar solicitud</button>
+        <div class="modal-error" id="modal-error"></div>
+      </form>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="modal-success-icon">✓</div>
+      <h2>¡Solicitud enviada!</h2>
+      <p class="desc" style="margin-bottom:0;">Gracias por tu interés. Nuestro equipo se pondrá en contacto con vos en las próximas 24 horas hábiles.</p>
+    </div>
+  </div>
+</div>
+<!-- END: Demo Modal -->
+
+<!-- BEGIN: Footer -->
+<footer class="bg-surface-container-low border-t border-white/10 py-10 px-4 sm:px-6" role="contentinfo">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="text-white/50 text-sm">© 2026 Univers. Todos los derechos reservados.</p>
+    <nav aria-label="Enlaces legales" class="flex gap-6">
+      <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Privacidad</a>
+      <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Términos</a>
+    </nav>
+  </div>
+</footer>
+<!-- END: Footer -->
+
+<!-- GSAP — loaded before inline script to activate parallax and scroll animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
 <script>
-  // Brand reveal overlay — blindado
+  // ═══════════════════════════════════════════════════════
+  // Brand reveal overlay — blindado, with spinner cleanup
+  // ═══════════════════════════════════════════════════════
   (function() {
     var O = document.getElementById('brand-reveal');
     var L = document.getElementById('brand-logo');
+    var S = document.getElementById('brand-spinner');
     if (!O || !L) return;
 
     var START = Date.now();
+
+    function hideReveal() {
+      if (S) S.style.display = 'none';
+      O.style.transition = 'opacity 0.5s ease';
+      O.style.opacity = '0';
+      setTimeout(function() { O.style.display = 'none'; }, 500);
+    }
 
     // Esperar que el DOM e imágenes carguen, luego FLIP
     setTimeout(function() {
       var navLogo = document.querySelector('.logo-transition-container img');
 
       if (!navLogo) {
-        // Fallback: fade out suave
-        O.style.transition = 'opacity 0.6s ease';
-        O.style.opacity = '0';
-        setTimeout(function() { O.style.display = 'none'; }, 600);
+        hideReveal();
         return;
       }
 
@@ -650,6 +881,7 @@
       L.style.opacity = '0.5';
 
       setTimeout(function() {
+        if (S) S.style.display = 'none';
         O.style.transition = 'opacity 0.5s ease';
         O.style.opacity = '0';
         setTimeout(function() { O.style.display = 'none'; }, 500);
@@ -658,15 +890,17 @@
 
     // Safety: si a los 8s el overlay sigue visible, forzar cierre
     setTimeout(function() {
-      if (O.style.display !== 'none') {
-        O.style.transition = 'opacity 0.5s ease';
-        O.style.opacity = '0';
-        setTimeout(function() { O.style.display = 'none'; }, 500);
-      }
+      if (O.style.display !== 'none') hideReveal();
     }, 8000);
+
+    // Hide spinner if image loads faster than timeout
+    if (L.complete) { if (S) S.style.display = 'none'; }
+    else { L.onload = function() { if (S) S.style.display = 'none'; }; }
   })();
 
+  // ═══════════════════════════════════════════════════════
   // Sprite factory function
+  // ═══════════════════════════════════════════════════════
   function createSprite(canvasId, src, opts) {
     var canvas = document.getElementById(canvasId);
     if (!canvas) return null;
@@ -943,8 +1177,130 @@
       }, { passive: true });
     }
   })();
+
+  // ═══════════════════════════════════════════════════════
+  // Demo Modal — open/close/submit
+  // ═══════════════════════════════════════════════════════
+  (function() {
+    var modal = document.getElementById('demo-modal');
+    var form = document.getElementById('demo-form');
+    var formContainer = document.getElementById('modal-form');
+    var successContainer = document.getElementById('modal-success');
+    var errorEl = document.getElementById('modal-error');
+    var submitBtn = document.getElementById('modal-submit-btn');
+    if (!modal) return;
+
+    window.openDemoModal = function() {
+      formContainer.classList.remove('hidden');
+      successContainer.classList.remove('active');
+      errorEl.classList.remove('active');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close button
+    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+
+    // Demo trigger links
+    document.querySelectorAll('.demo-trigger').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openDemoModal();
+      });
+    });
+
+    // Form submission
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        errorEl.classList.remove('active');
+
+        var nombre = document.getElementById('form-nombre').value.trim();
+        var email = document.getElementById('form-email').value.trim();
+        var empresa = document.getElementById('form-empresa').value.trim();
+
+        if (!nombre || !email || !empresa) {
+          errorEl.textContent = 'Todos los campos son obligatorios.';
+          errorEl.classList.add('active');
+          return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          errorEl.textContent = 'Por favor, ingresá un email válido.';
+          errorEl.classList.add('active');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        // Also send via n8n webhook (fire-and-forget, don't block on success state)
+        var payload = { nombre: nombre, email: email, empresa: empresa };
+        fetch('https://n8n.univers.ai/webhook/demo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(function() {
+          // Silently ignore — webhook is fire-and-forget
+        });
+
+        // Show success immediately
+        formContainer.classList.add('hidden');
+        successContainer.classList.add('active');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar solicitud';
+      });
+    }
+  })();
+
+  // ═══════════════════════════════════════════════════════
+  // Mobile Hamburger Menu
+  // ═══════════════════════════════════════════════════════
+  (function() {
+    var hamburger = document.getElementById('hamburger-btn');
+    var drawer = document.getElementById('mobile-drawer');
+    var overlay = document.getElementById('drawer-overlay');
+    var closeBtn = document.getElementById('drawer-close');
+    var links = document.querySelectorAll('.drawer-link');
+    if (!hamburger || !drawer) return;
+
+    function openDrawer() {
+      drawer.classList.add('active');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('active');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (overlay) overlay.addEventListener('click', closeDrawer);
+    links.forEach(function(link) { link.addEventListener('click', closeDrawer); });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('active')) closeDrawer();
+    });
+  })();
+
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 </body></html>
