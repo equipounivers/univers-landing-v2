@@ -1,0 +1,13 @@
+# Cleanup
+carpeta de limpieza/
+
+# Agent artifacts
+.atl/
+*.artifact.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/

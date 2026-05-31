@@ -1,0 +1,8 @@
+{
+  "name": "univers-landing",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  }
+}

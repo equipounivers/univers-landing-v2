@@ -1,0 +1,950 @@
+<!doctype html>
+<html class="dark" lang="es"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Univers — Agentes de IA para Ventas">
+  <meta property="og:description" content="Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://univers.ai">
+  <meta property="og:image" content="https://univers.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://univers.ai/og-image.png">
+  <title>Univers - Agentes de IA para Ventas</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#111417",
+            "on-secondary": "#26276f",
+            "on-primary-fixed": "#07006c",
+            "tertiary-fixed": "#f9d8ff",
+            "surface-container-low": "#191c1f",
+            "on-primary-container": "#faf7ff",
+            "inverse-surface": "#e1e2e7",
+            "secondary-fixed": "#e1dfff",
+            "inverse-on-surface": "#2e3134",
+            "on-surface-variant": "#c7c4d7",
+            "primary-fixed": "#e1e0ff",
+            "on-tertiary-container": "#fff6fc",
+            "on-secondary-fixed": "#0f0d5a",
+            "primary-fixed-dim": "#c1c1ff",
+            "on-tertiary": "#4c1761",
+            "surface-tint": "#c1c1ff",
+            "on-secondary-fixed-variant": "#3d3e87",
+            "on-primary-fixed-variant": "#2e2bc2",
+            "inverse-primary": "#4849da",
+            "on-surface": "#e1e2e7",
+            "secondary-container": "#3d3e87",
+            "on-primary": "#1200a9",
+            "on-tertiary-fixed-variant": "#653079",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "surface-dim": "#111417",
+            "on-error-container": "#ffdad6",
+            "secondary": "#c1c1ff",
+            "surface-container-high": "#282a2e",
+            "tertiary-container": "#945ca8",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed": "#320046",
+            "on-secondary-container": "#adaefe",
+            "outline-variant": "#464555",
+            "surface-container-highest": "#323539",
+            "surface": "#111417",
+            "primary-container": "#5d5fef",
+            "primary": "#c1c1ff",
+            "outline": "#908fa0",
+            "surface-container-lowest": "#0c0e12",
+            "surface-bright": "#37393d",
+            "tertiary": "#edb1ff",
+            "secondary-fixed-dim": "#c1c1ff",
+            "tertiary-fixed-dim": "#edb1ff",
+            "on-background": "#e1e2e7",
+            "surface-variant": "#323539",
+            "surface-container": "#1d2023"
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', 'sans-serif'],
+            headline: ['Sora', 'sans-serif'],
+          },
+          borderRadius: {
+            '4xl': '40px',
+            '5xl': '64px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      color: #e1e2e7;
+      background-color: #6a4c93;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.20) 1.2px, transparent 1.2px),
+        linear-gradient(180deg, #1a1c5e 0%, #6a4c93 50%, #9b8ec4 100%);
+      background-size: 24px 24px, 100% 100%;
+      background-attachment: fixed, fixed;
+      background-position: center center, center center;
+    }
+    .hero-title {
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+    }
+    .dot-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    #floating-nav {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(-120px);
+      opacity: 0;
+    }
+    body.scrolled #floating-nav {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    body.scrolled #static-nav {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .univers-gradient {
+      background: linear-gradient(135deg, #5d5fef 0%, #edb1ff 100%);
+    }
+    .image-glow {
+      filter: drop-shadow(0 0 30px rgba(93, 95, 239, 0.4));
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .capsule-shadow {
+      box-shadow: 0 40px 100px -20px rgba(0,0,0,0.25);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up {
+      animation: fadeUp 1s ease-out forwards;
+    }
+    .logo-transition-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .logo-text-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 300px;
+      opacity: 1;
+    }
+    #floating-nav .logo-text-wrapper {
+      max-width: 0;
+      opacity: 0;
+      gap: 0;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary { list-style: none; }
+    details[open] > div:last-of-type { animation: slideDown 0.3s ease; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sprite-container { position: relative; width: 100%; max-width: 260px; aspect-ratio: 215 / 463; overflow: hidden; }
+    .sprite-container canvas { width: 100%; height: 100%; display: block; border-radius: 16px; image-rendering: auto; -webkit-optimize-contrast: optimizeQuality; }
+    .sprite-container .loading-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(93, 95, 239, 0.08); border: 2px dashed rgba(93, 95, 239, 0.25);
+      border-radius: 16px; color: rgba(255,255,255,0.5); font-size: 13px; text-align: center; padding: 16px;
+    }
+    .sprite-container.loaded .loading-placeholder { display: none; }
+    .sprite-container.error .loading-placeholder { border-color: rgba(255,100,100,0.4); color: rgba(255,100,100,0.7); }
+    @keyframes float {
+      0%, 100% { top: -16px; }
+      50% { top: -24px; }
+    }
+    @keyframes ctaGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(93, 95, 239, 0.2); }
+      50% { box-shadow: 0 0 35px rgba(93, 95, 239, 0.5); }
+    }
+    .cta-glow { animation: ctaGlow 3s ease-in-out infinite; }
+    @keyframes heroGlow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(93,95,239,0.2)) drop-shadow(0 0 40px rgba(93,95,239,0.1)); }
+      50% { filter: drop-shadow(0 0 25px rgba(93,95,239,0.4)) drop-shadow(0 0 60px rgba(93,95,239,0.2)); }
+    }
+    .hero-glow { animation: heroGlow 4s ease-in-out infinite; }
+    .reveal { opacity: 0; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .counter-value { display: inline-block; }
+    .sprite-wrap {
+      position: relative;
+      opacity: 0;
+      animation: spriteFadeIn 0.6s ease 0.4s forwards;
+    }
+    @keyframes spriteFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .sprite-wrap .loading-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(93, 95, 239, 0.08); border: 2px dashed rgba(93, 95, 239, 0.25);
+      border-radius: 50%; color: rgba(255,255,255,0.5); font-size: 11px; text-align: center; padding: 8px;
+    }
+    .sprite-wrap.loaded .loading-placeholder { display: none; }
+    .sprite-wrap.error .loading-placeholder { border-color: rgba(255,100,100,0.4); color: rgba(255,100,100,0.7); }
+  </style>
+</head>
+<body class="font-sans text-on-background overflow-x-hidden min-h-screen">
+  <!-- Brand reveal overlay -->
+  <div id="brand-reveal" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:#111417;">
+    <img src="sprites/Logo univers sin fondo.png" alt="Univers" id="brand-logo" style="width:clamp(200px,28vw,360px);height:auto;">
+  </div>
+  <!-- Full-page background overlay -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none z-0" style="background-image: url('sprites/descarga (2).webp'); background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.15;"></div>
+
+<!-- BEGIN: Static Navigation -->
+<nav class="w-full px-4 sm:px-6 transition-opacity duration-300 py-4" id="static-nav">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="logo-transition-container">
+        <!-- REPLACE: Tu isotype real -->
+        <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-12 w-auto">
+        <div class="logo-text-wrapper">
+          <div class="w-px bg-white/20 h-6"></div>
+          <span class="font-headline text-white text-xl tracking-[0.25em] uppercase font-extralight">Univers</span>
+        </div>
+      </div>
+    </div>
+    <div class="hidden lg:flex items-center gap-8 text-sm font-bold uppercase tracking-wider text-white/80">
+      <a class="hover:text-primary transition-colors" href="#agentes">Agentes</a>
+      <a class="hover:text-primary transition-colors" href="#precios">Precios</a>
+      <a class="hover:text-primary transition-colors" href="#casos">Casos de Éxito</a>
+      <a class="hover:text-primary transition-colors" href="#faq">FAQ</a>
+    </div>
+    <div class="flex items-center gap-6 h-full items-stretch">
+      <div class="flex items-center gap-4">
+        <a class="text-white/80 hover:text-white transition-colors flex items-center justify-center h-full self-center" href="#">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.579.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
+        </a>
+        <a class="text-white/80 hover:text-white transition-colors flex items-center justify-center h-full self-center" href="#">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A11.944 11.944 0 0 0 0 11.944c0 6.598 5.346 11.944 11.944 11.944 6.598 0 11.944-5.346 11.944-11.944C23.888 5.346 18.542 0 11.944 0zm6.02 8.006c-.174.738-1.24 6.66-1.79 9.104-.222.99-.654 1.322-1.074 1.354-.912.072-1.604-.6-2.486-1.176-.864-.564-1.518-.918-2.46-1.476-1.092-.648-.384-1.074.642-1.758.258-.174 2.004-1.824 2.874-2.682.06-.06.12-.174.066-.282-.054-.108-.192-.084-.282-.066-.132.024-2.28 1.44-6.456 4.272-.66.462-1.26.684-1.8.672-.552-.012-1.506-.282-2.244-.54-.9-.312-1.584-.48-1.536-1.008.036-.276.36-.552.972-.858 4.14-1.854 6.912-3.084 8.298-3.69 3.954-1.728 4.776-2.028 5.31-2.028.132 0 .396.03.564.18.144.132.186.306.198.468.012.18-.006.384-.03.6z"></path></svg>
+        </a>
+      </div>
+        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow" href="mailto:hola@univers.ai">Solicitar Demo</a>
+    </div>
+  </div>
+</nav>
+<!-- END: Static Navigation -->
+
+<!-- BEGIN: Floating Navigation -->
+<div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4" id="floating-nav">
+  <div class="bg-surface-container-high/60 backdrop-blur-[20px] rounded-full px-6 flex items-center gap-8 shadow-2xl border border-white/20 py-1.5 h-12">
+      <div class="logo-transition-container items-center h-full">
+        <!-- REPLACE: Tu isotype real (versión pequeña) -->
+        <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-7 w-auto">
+        <div class="logo-text-wrapper"></div>
+    </div>
+    <div class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-on-surface-variant h-full">
+      <a class="hover:text-primary transition-colors flex items-center" href="#agentes">Agentes</a>
+      <a class="hover:text-primary transition-colors flex items-center" href="#precios">Precios</a>
+      <a class="hover:text-primary transition-colors flex items-center" href="#casos">Casos de Éxito</a>
+    </div>
+    <div class="flex items-center gap-3 h-full items-stretch">
+      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center h-full self-center" href="#">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.579.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
+      </a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors flex items-center h-full self-center" href="#">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0C5.346 0 0 5.346 0 11.944c0 6.598 5.346 11.944 11.944 11.944 6.598 0 11.944-5.346 11.944-11.944C23.888 5.346 18.542 0 11.944 0zm5.64 7.56c-.168 1.764-1.224 7.956-1.764 10.848-.228 1.224-.684 1.632-1.116 1.668-1.044.084-1.836-.708-2.844-1.368-1.572-1.032-2.46-1.668-3.984-2.676-1.764-1.164-.624-1.8 1.836-3.84 1.044-1.044 1.956-2.004 2.856-3.036.084-.096.168-.276.12-.336-.048-.06-.216-.048-.312-.024-.132.024-2.268 1.452-6.42 4.272-1.044.732-1.992 1.092-2.844 1.068-.936-.024-2.736-.528-4.068-.96-1.632-.528-2.928-.804-2.82-1.692.06-.468.684-.948 1.872-1.44 7.344-3.192 12.24-5.292 14.688-6.3.36-.156.708-.228 1.032-.216.48.012 1.044.276 1.416.36.312.072.588.228.744.408.156.192.216.396.192.612z"></path></svg>
+      </a>
+      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center" href="mailto:hola@univers.ai">Solicitar Demo</a>
+    </div>
+  </div>
+</div>
+<!-- END: Floating Navigation -->
+
+<!-- BEGIN: Hero Section -->
+<main class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 min-h-screen dot-grid bg-transparent flex items-center" data-parallax="0.15">
+  <div class="max-w-7xl mx-auto w-full">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+      <div class="flex-1 z-20 text-center lg:text-left" data-parallax="0.08">
+        <h1 class="font-headline text-[15vw] sm:text-[12vw] lg:text-[160px] hero-title uppercase text-white font-extrabold hero-glow">
+          El Futuro<br>Del Trabajo
+        </h1>
+        <div class="mt-8 lg:mt-16 max-w-xl mx-auto lg:mx-0">
+          <p class="text-xl lg:text-2xl text-white/90 leading-relaxed font-medium">
+            Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites.
+          </p>
+          <div class="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40" href="#agentes">Ver Agentes</a>
+            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm" href="mailto:hola@univers.ai">Solicitar Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full lg:w-[60%] flex items-center justify-center relative h-[500px] lg:h-[750px]">
+        <!-- Astronaut sprite -->
+        <div class="relative z-10 w-full h-full flex items-center justify-center translate-x-[-25%] transition-all duration-700 hover:translate-y-[-10px] hover:scale-105 group">
+          <div class="sprite-container image-glow" id="sprite-wrapper">
+            <div class="loading-placeholder">
+              <div>
+                <span class="material-symbols-outlined text-4xl mb-2 block">downloading</span>
+                Cargando robot...<br><small style="opacity:0.6">(PNG alta calidad — 36 frames, 430×540)</small>
+              </div>
+            </div>
+            <canvas id="astronaut-sprite"></canvas>
+          </div>
+        </div>
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 h-[85%] w-[90%] bg-gradient-to-br from-white to-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-0 rounded-2xl overflow-hidden">
+          <img src="sprites/Priority signals for urgent messages without panic.webp" class="w-full h-full object-cover blur-[2px] opacity-85">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- END: Hero Section -->
+
+<!-- BEGIN: Transition Section -->
+<section class="min-h-[35vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-16 bg-transparent">
+  <div class="max-w-4xl mx-auto animate-fade-up">
+    <p class="text-white/60 text-xl md:text-2xl font-medium mb-4">Cada minuto que tu equipo pasa en tareas manuales...</p>
+    <p class="text-white text-3xl md:text-5xl lg:text-6xl font-headline font-black uppercase tracking-tight">estás <span class="text-red-500 animate-pulse" style="text-shadow: 0 0 20px rgba(239,68,68,0.6);">perdiendo</span> ventas y clientes potenciales.</p>
+  </div>
+</section>
+<!-- END: Transition Section -->
+
+<!-- BEGIN: The Capsule -->
+<section class="relative px-4 sm:px-6 lg:px-8 pb-32">
+  <div class="max-w-7xl mx-auto bg-white rounded-4xl lg:rounded-5xl capsule-shadow overflow-hidden text-background">
+
+    <!-- 💥 CAOS Section -->
+    <div class="p-8 sm:p-12 lg:p-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="order-1 reveal">
+        <span class="inline-block px-4 py-1.5 bg-error/10 text-error-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-error/20">Para equipos de ventas...</span>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">Tu negocio está COLAPSANDO sin un agente IA</h2>
+        <div class="p-6 sm:p-8 bg-surface-container-low rounded-3xl border border-outline/10">
+          <p class="text-4xl font-headline font-black text-red-500 mb-2 animate-pulse" style="text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);"><span class="counter-value">42%</span></p>
+          <p class="text-on-surface-variant font-medium">de tus clientes abandonan el chat si no hay respuesta en 2 minutos.</p>
+        </div>
+      </div>
+      <div class="order-2 relative flex justify-center">
+        <!-- REPLACE: Imagen smartphone con notificaciones -->
+        <div class="overflow-hidden rounded-3xl lg:rounded-4xl shadow-xl aspect-[9/16] w-full max-w-[320px] bg-surface-container-low">
+          <video src="sprites/sinveoDigital_notifications_explode_in…_202605281446 (online-video-cutter.com).mp4" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover"></video>
+        </div>
+        <div class="absolute bg-red-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl font-bold flex items-center gap-2 sm:gap-3 animate-bounce shadow-xl text-xs sm:text-base right-2 sm:right-4 -top-16 whitespace-nowrap">⚠️ 99+ mensajes sin responder</div>
+      </div>
+    </div>
+
+    <div class="mx-8 sm:mx-12 lg:mx-24 h-px bg-outline/10"></div>
+
+    <!-- ✨ PAZ Section -->
+    <div class="p-8 sm:p-12 lg:p-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="order-2 lg:order-1 relative">
+        <!-- REPLACE: Imagen del robot/IA en paz -->
+        <!-- Working Robot Sprite -->
+        <div id="working-float" class="absolute left-1/2 -translate-x-1/2 bottom-0 w-48 h-48 z-20 pointer-events-none sprite-wrap">
+          <div class="loading-placeholder">
+            <span class="material-symbols-outlined text-2xl mb-1 block">downloading</span>
+            <span style="font-size:10px;">Cargando...</span>
+          </div>
+          <canvas id="working-sprite" class="w-full h-full"></canvas>
+        </div>
+        <div class="overflow-hidden rounded-3xl lg:rounded-4xl shadow-2xl relative z-10 aspect-square p-1">
+          <video src="sprites/movimiento_de_checks_verdes_202605251318.mp4" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover rounded-[2.5rem]"></video>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2 reveal reveal-delay-1">
+        <span class="inline-block px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-green-500/20">Mensajes contestados, citas anotadas.</span>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">0 MENSAJES SIN RESPONDER</h2>
+        <div class="p-6 sm:p-8 bg-primary-container/5 rounded-3xl border border-primary-container/10 mb-8">
+          <p class="text-4xl font-headline font-black text-green-400 mb-2"><span class="counter-value">100%</span></p>
+          <p class="text-on-surface-variant font-medium">de tasa de respuesta automatizada con tono humano.</p>
+        </div>
+        <a class="inline-flex items-center gap-4 bg-primary-container text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center" href="mailto:hola@univers.ai">
+          Solicitar demo →
+        </a>
+      </div>
+    </div>
+
+    <!-- ⚙️ Technologies & Process -->
+    <div class="p-8 sm:p-12 lg:p-24 bg-white relative" id="agentes">
+      <!-- Floating peeking sprite — positioned relative to servicios section -->
+      <div id="peeking-float" class="absolute z-30 pointer-events-none sprite-wrap hidden md:block" style="top: -80px; left: 10%; width: 192px; height: 192px;">
+        <div class="loading-placeholder">
+          <span class="material-symbols-outlined text-2xl mb-1 block">downloading</span>
+          <span style="font-size:10px;">Cargando...</span>
+        </div>
+        <canvas id="peeking-sprite" class="w-full h-full"></canvas>
+      </div>
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block px-4 py-1.5 bg-primary-container/10 text-primary-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-primary-container/20">Expertise</span>
+        <h2 class="font-headline font-black text-4xl lg:text-5xl uppercase">Nuestros Servicios</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="services-grid">
+        <!-- Service 1 -->
+        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+          <div class="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined !text-4xl">support_agent</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-white">Agentes de atención general</h3>
+          <p class="text-sm text-white/90 leading-relaxed">Soporte multilingüe 24/7 que resuelve dudas frecuentes y filtra leads calificados en segundos.</p>
+        </div>
+        <!-- Service 2 -->
+        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
+            <span class="material-symbols-outlined !text-4xl">event_available</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-white">Agentes de citas</h3>
+          <p class="text-sm leading-relaxed text-white/90">Sincronización total con tu calendario para agendar, reprogramar y confirmar reuniones automáticamente.</p>
+        </div>
+        <!-- Service 3 -->
+        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+          <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined !text-4xl">settings_suggest</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-white">Automatizaciones a medida</h3>
+          <p class="text-sm text-white/90 leading-relaxed">Diseñamos flujos de trabajo personalizados que conectan tus herramientas actuales con el poder de la IA.</p>
+        </div>
+        <!-- Service 4 -->
+        <div class="p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
+            <span class="material-symbols-outlined !text-4xl">psychology</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-white">Consultoría Estratégica</h3>
+          <p class="text-sm leading-relaxed text-white/90">Analizamos tu modelo de negocio para identificar los puntos de mayor impacto para implementar IA.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-slate-50 p-8 sm:p-12 lg:p-24 border-y border-outline/10">
+      <div class="text-center mb-16 reveal">
+        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Integrado con lo que ya usas</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12 items-center justify-items-center opacity-90">
+          <span class="font-headline font-bold text-xl lg:text-2xl text-background">Chatwoot</span>
+          <span class="font-headline font-bold text-xl lg:text-2xl text-background">Baserow</span>
+          <span class="font-headline font-bold text-xl lg:text-2xl text-background">VPS</span>
+          <span class="font-headline font-bold text-xl lg:text-2xl text-background">N8N</span>
+          <span class="font-headline font-bold text-xl lg:text-2xl text-background">Typebot</span>
+          <span class="font-headline font-bold text-xl lg:text-2xl text-background">OpenAI</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div class="relative text-center lg:text-left reveal reveal-delay-1">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">01</div>
+          <h4 class="font-bold mb-2">Análisis de flujo</h4>
+          <p class="text-sm text-on-surface-variant">Auditamos tus conversaciones actuales para mapear el ADN de tu marca.</p>
+        </div>
+        <div class="relative text-center lg:text-left reveal reveal-delay-2">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">02</div>
+          <h4 class="font-bold mb-2">Entrenamiento IA</h4>
+          <p class="text-sm text-on-surface-variant">Alimentamos al agente con tu base de conocimientos y catálogos.</p>
+        </div>
+        <div class="relative text-center lg:text-left reveal reveal-delay-3">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">03</div>
+          <h4 class="font-bold mb-2">Despliegue</h4>
+          <p class="text-sm text-on-surface-variant">Conectamos tu infraestructura (WhatsApp, Telegram, Web).</p>
+        </div>
+        <div class="relative text-center lg:text-left reveal reveal-delay-1">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">04</div>
+          <h4 class="font-bold mb-2">Optimización</h4>
+          <p class="text-sm text-on-surface-variant">Monitoreo continuo para mejorar la conversión de leads.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEGIN: Editorial Section -->
+    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div class="order-2 lg:order-1">
+          <!-- REPLACE: Isotype small -->
+          <div class="mb-10 lg:mb-12 -ml-8 sm:-ml-12 lg:-ml-24 -translate-x-[10%]">
+            <div class="bg-black/90 rounded-r-xl pl-8 sm:pl-12 lg:pl-24 pr-8 py-4 inline-block">
+              <img src="sprites/LOGO SIN LETRAS.png" alt="Univers Logo" class="h-28 w-auto">
+            </div>
+          </div>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1">No es una herramienta que programás, es un compañero que entrenás.</h2>
+          <div class="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-xl">
+            <p class="">En el corazón de la era de la IA, la diferencia no está en quién tiene acceso a la tecnología, sino en cómo se integra con la cultura de tu empresa.</p>
+            <p class="">Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y evoluciona con cada interacción.</p>
+          </div>
+          <div class="mt-12">
+            <a class="inline-flex items-center gap-4 bg-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center" href="mailto:hola@univers.ai">
+              Solicitar demo →
+            </a>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="relative group">
+            <div class="absolute inset-0 univers-gradient opacity-20 blur-2xl group-hover:opacity-30 transition-opacity"></div>
+            <!-- REPLACE: Imagen editorial mockup -->
+            <div class="overflow-hidden rounded-4xl lg:rounded-5xl shadow-3xl aspect-square bg-surface-container-low">
+              <img src="sprites/ROLE]_Act_as_a_world-class_202605291316.jpeg" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Editorial Section -->
+
+    <!-- 💰 Packages -->
+    <div class="p-8 sm:p-12 lg:p-24 bg-white" id="precios">
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal">Inversión en Crecimiento</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Básico -->
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1">
+          <h3 class="font-headline font-bold text-2xl mb-2">Básico</h3>
+          <p class="text-on-surface-variant mb-8">Para startups en etapa temprana.</p>
+          <div class="text-4xl font-headline font-black mb-10">$299<span class="text-sm font-medium text-on-surface-variant">/mes</span></div>
+          <ul class="space-y-4 mb-10 text-sm flex-grow">
+            <li class="flex items-center gap-3">✓ 1 Agente de Ventas</li>
+            <li class="flex items-center gap-3">✓ 1,000 conversaciones/mes</li>
+            <li class="flex items-center gap-3">✓ Integración WhatsApp</li>
+          </ul>
+          <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Elegir Plan</a>
+        </div>
+        <!-- Profesional -->
+        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Popular</div>
+          <h3 class="font-headline font-bold text-2xl mb-2">Profesional</h3>
+          <p class="text-on-surface-variant mb-8">Optimizado para equipos activos.</p>
+          <div class="text-4xl font-headline font-black mb-10">$599<span class="text-sm font-medium text-on-surface-variant">/mes</span></div>
+          <ul class="space-y-4 mb-10 text-sm flex-grow">
+            <li class="flex items-center gap-3 font-bold text-primary-container">✓ 3 Agentes Especializados</li>
+            <li class="flex items-center gap-3">✓ 5,000 conversaciones/mes</li>
+            <li class="flex items-center gap-3">✓ CRM Sync (Salesforce/Hubspot)</li>
+            <li class="flex items-center gap-3">✓ Soporte Prioritario</li>
+          </ul>
+          <a class="block text-center bg-primary-container text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition-all shadow-lg" href="#">Elegir Plan</a>
+        </div>
+        <!-- Enterprise -->
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3">
+          <h3 class="font-headline font-bold text-2xl mb-2">Enterprise</h3>
+          <p class="text-on-surface-variant mb-8">Soluciones a medida para escala masiva.</p>
+          <div class="text-4xl font-headline font-black mb-10">Personalizado</div>
+          <ul class="space-y-4 mb-10 text-sm flex-grow">
+            <li class="flex items-center gap-3">✓ Agentes Ilimitados</li>
+            <li class="flex items-center gap-3">✓ Infraestructura dedicada</li>
+            <li class="flex items-center gap-3">✓ Acuerdos de Nivel de Servicio (SLA)</li>
+          </ul>
+          <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Contactar Ventas</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🛡️ Social Proof -->
+    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos">
+      <div class="flex flex-col gap-2 text-center md:text-left">
+        <p class="text-3xl lg:text-4xl font-headline font-black">Ahorro de <span class="counter-value">+120h</span>/mes</p>
+        <p class="text-white/60 uppercase tracking-widest text-xs font-bold">Por cada agente implementado</p>
+      </div>
+      <div class="flex items-center gap-8 lg:gap-12 opacity-50 flex-wrap justify-center">
+        <!-- REPLACE: Logos de integraciones como imágenes -->
+        <span class="font-headline font-bold text-lg text-white/70">Chatwoot</span>
+        <span class="font-headline font-bold text-lg text-white/70">N8N</span>
+        <span class="font-headline font-bold text-lg text-white/70">Typebot</span>
+        <span class="font-headline font-bold text-lg text-white/70">OpenAI</span>
+      </div>
+       <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center" href="mailto:hola@univers.ai">Acceso Beta Limitado</a>
+    </div>
+
+    <!-- ❓ FAQ -->
+    <div class="p-8 sm:p-12 lg:p-24 relative" id="faq">
+      <!-- Floating pensativo sprite — positioned near FAQ title -->
+      <div id="pensativo-float" class="sprite-wrap hidden md:block" style="position:absolute; top: 200px; left: 90%; transform: translateX(-50%); width: 200px; height: 200px; z-index: 10; pointer-events: none;">
+        <div class="loading-placeholder">
+          <span class="material-symbols-outlined text-2xl mb-1 block">downloading</span>
+          <span style="font-size:10px;">Cargando...</span>
+        </div>
+        <canvas id="pensativo-sprite" class="w-full h-full"></canvas>
+        <span id="pensativo-q" style="position:absolute;top:-16px;right:-12px;font-size:36px;font-weight:900;color:#fff;background:linear-gradient(135deg,#5d5fef,#edb1ff);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:none;pointer-events:none;box-shadow:0 4px 20px rgba(93,95,239,0.5);line-height:1;">?</span>
+      </div>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal">Preguntas Frecuentes</h2>
+      <div class="max-w-3xl mx-auto space-y-4">
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden" open="">
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
+            ¿Es difícil de configurar?
+            <span class="group-open:rotate-180 transition-transform">↓</span>
+          </summary>
+          <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
+            Para nada. Nuestro equipo se encarga de la implementación técnica. Tú solo nos das la información de tu negocio y nosotros entrenamos al agente.
+          </div>
+        </details>
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden">
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
+            ¿El agente suena como un robot?
+            <span class="group-open:rotate-180 transition-transform">↓</span>
+          </summary>
+          <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
+            Utilizamos modelos de lenguaje avanzados (GPT-4o) afinados con tu propio estilo de comunicación para asegurar un tono humano y empático.
+          </div>
+        </details>
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden">
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
+            ¿En qué idiomas puede atender?
+            <span class="group-open:rotate-180 transition-transform">↓</span>
+          </summary>
+          <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
+            Nuestros agentes son políglotas nativos. Pueden detectar y responder en más de 50 idiomas automáticamente.
+          </div>
+        </details>
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden">
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
+            ¿Puedo probarlo antes de pagar?
+            <span class="group-open:rotate-180 transition-transform">↓</span>
+          </summary>
+          <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
+            Sí. Ofrecemos una prueba gratuita de 14 días con todas las funcionalidades del plan Profesional. Sin tarjeta de crédito.
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END: The Capsule -->
+
+<script>
+  // Brand reveal overlay — blindado
+  (function() {
+    var O = document.getElementById('brand-reveal');
+    var L = document.getElementById('brand-logo');
+    if (!O || !L) return;
+
+    var START = Date.now();
+
+    // Esperar que el DOM e imágenes carguen, luego FLIP
+    setTimeout(function() {
+      var navLogo = document.querySelector('.logo-transition-container img');
+
+      if (!navLogo) {
+        // Fallback: fade out suave
+        O.style.transition = 'opacity 0.6s ease';
+        O.style.opacity = '0';
+        setTimeout(function() { O.style.display = 'none'; }, 600);
+        return;
+      }
+
+      // FLIP: calcular delta desde centro actual al centro del nav
+      var nR = navLogo.getBoundingClientRect();
+      var lR = L.getBoundingClientRect();
+      var dx = (nR.left + nR.width/2) - (lR.left + lR.width/2);
+      var dy = (nR.top + nR.height/2) - (lR.top + lR.height/2);
+      var sc = Math.min(nR.width / L.width, 0.5);
+
+      L.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease';
+      L.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(' + sc + ')';
+      L.style.opacity = '0.5';
+
+      setTimeout(function() {
+        O.style.transition = 'opacity 0.5s ease';
+        O.style.opacity = '0';
+        setTimeout(function() { O.style.display = 'none'; }, 500);
+      }, 800);
+    }, 1500);
+
+    // Safety: si a los 8s el overlay sigue visible, forzar cierre
+    setTimeout(function() {
+      if (O.style.display !== 'none') {
+        O.style.transition = 'opacity 0.5s ease';
+        O.style.opacity = '0';
+        setTimeout(function() { O.style.display = 'none'; }, 500);
+      }
+    }, 8000);
+  })();
+
+  // Sprite factory function
+  function createSprite(canvasId, src, opts) {
+    var canvas = document.getElementById(canvasId);
+    if (!canvas) return null;
+    var ctx = canvas.getContext('2d');
+    var fw = opts.frameW || 876;
+    var fh = opts.frameH || 876;
+    var cols = opts.cols || 6;
+    var total = opts.totalFrames || 36;
+    var dur = opts.duration || 45;
+    var dw = opts.displayW || fw;
+    var dh = opts.displayH || fh;
+    var pause = opts.pauseMs || 0;
+    var loop = opts.loop !== false;
+    var container = opts.containerId ? document.getElementById(opts.containerId) : null;
+
+    canvas.width = dw;
+    canvas.height = dh;
+
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    var currentFrame = 0;
+    var lastTime = 0;
+    var animating = true;
+    var rafId = null;
+    var paused = false;
+
+    img.onload = function() {
+      if (container) container.classList.add('loaded');
+
+      function drawFrame(frame) {
+        var col = frame % cols;
+        var row = Math.floor(frame / cols);
+        ctx.clearRect(0, 0, dw, dh);
+        ctx.drawImage(img, col * fw, row * fh, fw, fh, 0, 0, dw, dh);
+      }
+
+      function loop(ts) {
+        if (paused) { rafId = requestAnimationFrame(loop); return; }
+        if (!lastTime) lastTime = ts;
+        if (animating && ts - lastTime >= dur) {
+          lastTime = ts;
+          drawFrame(currentFrame);
+
+          if (opts.onFrame && opts.onFrame(currentFrame, total) === false) {
+            // Custom frame logic handled by callback
+          }
+
+          currentFrame++;
+          if (currentFrame >= total) {
+            if (pause > 0) {
+              animating = false;
+              currentFrame = 0;
+              drawFrame(0);
+              setTimeout(function() {
+                animating = true;
+                lastTime = 0;
+                if (!paused) requestAnimationFrame(loop);
+              }, pause);
+              return;
+            }
+            currentFrame = 0;
+            if (!loop) { return; }
+          }
+        }
+        rafId = requestAnimationFrame(loop);
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+
+    img.onerror = function() {
+      if (container) {
+        container.classList.add('error');
+        var ph = container.querySelector('.loading-placeholder');
+        if (ph) ph.innerHTML = '<span class="material-symbols-outlined text-4xl mb-2 block">error</span>No se pudo cargar el sprite';
+      }
+    };
+
+    img.src = src;
+
+    return {
+      stop: function() {
+        paused = true;
+        if (rafId) cancelAnimationFrame(rafId);
+      },
+      resume: function() {
+        paused = false;
+        lastTime = 0;
+        rafId = requestAnimationFrame(loop);
+      },
+      isRunning: function() { return !paused; }
+    };
+  }
+
+  // Initialize sprite when visible (lazy loading via IntersectionObserver)
+  function initSpriteOnVisible(canvasId, src, opts) {
+    var container = opts.containerId ? document.getElementById(opts.containerId) : canvasId ? document.getElementById(canvasId)?.parentElement : null;
+    if (!container) { createSprite(canvasId, src, opts); return; }
+
+    if (!('IntersectionObserver' in window)) {
+      createSprite(canvasId, src, opts);
+      return;
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          createSprite(canvasId, src, opts);
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    observer.observe(container);
+  }
+
+  // Scroll handler for floating nav
+  (function() {
+    var scrollThreshold = 200;
+    function onScroll() {
+      if (window.scrollY > scrollThreshold) {
+        document.body.classList.add('scrolled');
+      } else {
+        document.body.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Sprite initializations
+  // Hero sprite — above fold (direct create)
+  createSprite('astronaut-sprite', 'sprites/hero-robot.png', {
+    frameW: 215, frameH: 463, cols: 12, totalFrames: 82, duration: 45,
+    displayW: 645, displayH: 1389, pauseMs: 5000, containerId: 'sprite-wrapper'
+  });
+
+  // Peeking sprite — lazy loaded
+  initSpriteOnVisible('peeking-sprite', 'sprites/services-peeking.png', {
+    frameW: 876, frameH: 876, cols: 6, totalFrames: 6, duration: 45,
+    pauseMs: 5000, containerId: 'peeking-float'
+  });
+
+  // Pensativo sprite — lazy loaded, with custom onFrame for "?" bubble
+  (function() {
+    var qMark = document.getElementById('pensativo-q');
+    initSpriteOnVisible('pensativo-sprite', 'sprites/Pensativospritesheet.png', {
+      frameW: 876, frameH: 876, cols: 6, totalFrames: 24, duration: 45,
+      pauseMs: 5000, containerId: 'pensativo-float',
+      onFrame: function(frame, total) {
+        if (frame === total - 1 && qMark) {
+          qMark.style.transition = 'none';
+          qMark.style.opacity = '1';
+          qMark.style.transform = 'scale(0)';
+          requestAnimationFrame(function() {
+            qMark.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease';
+            qMark.style.transform = 'scale(1)';
+          });
+        }
+        if (frame === 0 && qMark) {
+          qMark.style.transition = 'opacity 0.15s ease';
+          qMark.style.opacity = '0';
+        }
+        return true;
+      }
+    });
+  })();
+
+  // Working sprite — lazy loaded, continuous loop
+  initSpriteOnVisible('working-sprite', 'sprites/working.png', {
+    frameW: 876, frameH: 876, cols: 6, totalFrames: 36, duration: 50,
+    pauseMs: 0, loop: true, containerId: 'working-float'
+  });
+
+  // GSAP defaults (only if GSAP loaded)
+  if (typeof gsap !== 'undefined') gsap.defaults({ ease: 'power2.out' });
+
+  // Scroll reveal — GSAP ScrollTrigger + fallback
+  (function() {
+    var hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+    // Reduced motion — show everything
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(function(el) { el.style.opacity = '1'; });
+      return;
+    }
+
+    if (hasGSAP) {
+      // Animate each .reveal section with GSAP
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        gsap.from(el, {
+          y: 40, opacity: 0, duration: 0.8,
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none', once: true }
+        });
+      });
+
+      // Animated counters with GSAP
+      document.querySelectorAll('.counter-value').forEach(function(el) {
+        var text = el.textContent;
+        var isPercentage = text.includes('%');
+        var hasPrefix = text.startsWith('+');
+        var suffix = text.replace(/^[^0-9]*/, '').replace(/[0-9]/g, '');
+        var target = parseInt(text.replace(/[^0-9]/g, '')) || 0;
+
+        ScrollTrigger.create({
+          trigger: el, start: 'top 90%', once: true,
+          onEnter: function() {
+            gsap.to({ val: 0 }, {
+              val: target, duration: 1.5, ease: 'power2.out',
+              onUpdate: function() {
+                var cur = Math.floor(this.targets()[0].val);
+                el.textContent = (hasPrefix ? '+' : '') + cur + (isPercentage ? '%' : suffix);
+              },
+              onComplete: function() {
+                el.textContent = (hasPrefix ? '+' : '') + target + (isPercentage ? '%' : suffix);
+              }
+            });
+          }
+        });
+      });
+    } else {
+      // Fallback: IntersectionObserver + CSS transitions
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        el.style.transform = 'translateY(40px)';
+      });
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              // Stagger según clase de delay
+              var d = 0;
+              if (entry.target.classList.contains('reveal-delay-1')) d = 120;
+              else if (entry.target.classList.contains('reveal-delay-2')) d = 240;
+              else if (entry.target.classList.contains('reveal-delay-3')) d = 360;
+              setTimeout(function() {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = '';
+              }, d);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function(el) { el.style.opacity = '1'; el.style.transform = ''; });
+      }
+    }
+  })();
+
+  // Hero parallax — GSAP ScrollTrigger + fallback
+  (function() {
+    var heroEls = document.querySelectorAll('[data-parallax]');
+    if (!heroEls.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      heroEls.forEach(function(el) {
+        var speed = parseFloat(el.getAttribute('data-parallax')) || 0.15;
+        gsap.to(el, {
+          y: function() { return window.innerHeight * speed * 0.5; },
+          ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+    } else {
+      // Fallback: passive scroll listener
+      window.addEventListener('scroll', function() {
+        var sy = window.scrollY;
+        heroEls.forEach(function(el) {
+          var speed = parseFloat(el.getAttribute('data-parallax')) || 0.15;
+          el.style.transform = 'translateY(' + (sy * speed) + 'px)';
+        });
+      }, { passive: true });
+    }
+  })();
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+</body></html>
