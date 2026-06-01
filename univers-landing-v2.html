@@ -11,6 +11,7 @@
   <meta name="twitter:image" content="sprites/Logo univers sin fondo.png">
   <meta name="description" content="Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites. Automatización omnicanal 24/7 para WhatsApp, Instagram y Facebook.">
   <link rel="canonical" href="https://univers.ai/">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
   <title>Univers - Agentes de IA para Ventas</title>
   <script type="application/ld+json">
   {
@@ -375,12 +376,13 @@
 </head>
 <body class="font-sans text-on-background overflow-x-hidden min-h-screen">
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
-  <!-- Brand reveal overlay -->
-  <div id="brand-reveal" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:#111417;">
-    <div class="brand-logo-wrap">
-      <img src="sprites/Logo univers sin fondo.png" alt="Univers" id="brand-logo" style="width:clamp(200px,28vw,360px);height:auto;" onerror="this.style.display='none';document.getElementById('brand-fallback').classList.add('active');">
-      <div class="logo-fallback" id="brand-fallback">Univers</div>
-      <div class="brand-spinner" id="brand-spinner"></div>
+  <!-- Brand reveal overlay — video background + logo FLIP -->
+  <div id="brand-reveal" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:#111417;overflow:hidden;">
+    <!-- Video background (muted, plays once) -->
+    <video id="brand-video" src="sprites/Nubes_moradas_arremolinándose_en…_202606011137.mp4" muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;"></video>
+    <!-- Logo PNG -->
+    <div id="brand-logo-container" style="position:relative;display:flex;flex-direction:column;align-items:center;">
+      <img id="brand-logo" src="sprites/Logo univers sin fondo.png" alt="Univers" style="width:clamp(200px,28vw,360px);height:auto;opacity:0;filter:drop-shadow(0 0 60px rgba(93,95,239,0.8));">
     </div>
   </div>
   <!-- Full-page background overlay -->
@@ -448,7 +450,7 @@
 </div>
 <!-- END: Floating Navigation -->
 
-<main id="main-content">
+<main id="main-content" data-scroll-container>
 <!-- BEGIN: Hero Section -->
 <section class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 min-h-screen dot-grid bg-transparent flex items-center" data-parallax="0.15">
   <div class="max-w-7xl mx-auto w-full">
@@ -504,7 +506,7 @@
 
     <!-- 💥 CAOS Section -->
     <div class="p-8 sm:p-12 lg:p-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-1 reveal">
+      <div class="order-1 reveal" data-scroll-reveal>
         <span class="inline-block px-4 py-1.5 bg-error/10 text-error-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-error/20">Para equipos de ventas...</span>
         <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">Tu negocio está COLAPSANDO sin un agente IA</h2>
         <div class="p-6 sm:p-8 bg-surface-container-low rounded-3xl border border-outline/10">
@@ -539,7 +541,7 @@
           <video src="sprites/movimiento_de_checks_verdes_202605251318.mp4" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover rounded-[2.5rem]"></video>
         </div>
       </div>
-      <div class="order-1 lg:order-2 reveal reveal-delay-1">
+      <div class="order-1 lg:order-2 reveal reveal-delay-1" data-scroll-reveal>
         <span class="inline-block px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-green-500/20">Mensajes contestados, citas anotadas.</span>
         <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">0 MENSAJES SIN RESPONDER</h2>
         <div class="p-6 sm:p-8 bg-primary-container/5 rounded-3xl border border-primary-container/10 mb-8">
@@ -562,13 +564,13 @@
         </div>
         <canvas id="peeking-sprite" class="w-full h-full"></canvas>
       </div>
-      <div class="text-center mb-16 reveal">
+      <div class="text-center mb-16 reveal" data-scroll-reveal>
         <span class="inline-block px-4 py-1.5 bg-primary-container/10 text-primary-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-primary-container/20">Expertise</span>
         <h2 class="font-headline font-black text-4xl lg:text-5xl uppercase">Nuestros Servicios</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="services-grid">
         <!-- Service 1 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">support_agent</span>
           </div>
@@ -576,7 +578,7 @@
           <p class="text-sm text-white/90 leading-relaxed">Soporte multilingüe 24/7 que resuelve dudas frecuentes y filtra leads calificados en segundos.</p>
         </div>
         <!-- Service 2 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">event_available</span>
           </div>
@@ -584,7 +586,7 @@
           <p class="text-sm leading-relaxed text-white/90">Sincronización total con tu calendario para agendar, reprogramar y confirmar reuniones automáticamente.</p>
         </div>
         <!-- Service 3 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">settings_suggest</span>
           </div>
@@ -592,7 +594,7 @@
           <p class="text-sm text-white/90 leading-relaxed">Diseñamos flujos de trabajo personalizados que conectan tus herramientas actuales con el poder de la IA.</p>
         </div>
         <!-- Service 4 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">psychology</span>
           </div>
@@ -603,7 +605,7 @@
     </div>
 
     <div class="bg-slate-50 p-8 sm:p-12 lg:p-24 border-y border-outline/10">
-      <div class="text-center mb-16 reveal">
+      <div class="text-center mb-16 reveal" data-scroll-reveal>
         <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Integrado con lo que ya usas</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12 items-center justify-items-center opacity-90">
           <span class="font-headline font-bold text-xl lg:text-2xl text-background">Chatwoot</span>
@@ -615,22 +617,22 @@
         </div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-        <div class="relative text-center lg:text-left reveal reveal-delay-1">
+        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal>
           <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">01</div>
           <h4 class="font-bold mb-2">Análisis de flujo</h4>
           <p class="text-sm text-on-surface-variant">Auditamos tus conversaciones actuales para mapear el ADN de tu marca.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-2">
+        <div class="relative text-center lg:text-left reveal reveal-delay-2" data-scroll-reveal>
           <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">02</div>
           <h4 class="font-bold mb-2">Entrenamiento IA</h4>
           <p class="text-sm text-on-surface-variant">Alimentamos al agente con tu base de conocimientos y catálogos.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-3">
+        <div class="relative text-center lg:text-left reveal reveal-delay-3" data-scroll-reveal>
           <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">03</div>
           <h4 class="font-bold mb-2">Despliegue</h4>
           <p class="text-sm text-on-surface-variant">Conectamos tu infraestructura (WhatsApp, Telegram, Web).</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-1">
+        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal>
           <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">04</div>
           <h4 class="font-bold mb-2">Optimización</h4>
           <p class="text-sm text-on-surface-variant">Monitoreo continuo para mejorar la conversión de leads.</p>
@@ -639,7 +641,7 @@
     </div>
 
     <!-- BEGIN: Editorial Section -->
-    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal">
+    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal" data-scroll-reveal>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <div class="order-2 lg:order-1">
           <!-- REPLACE: Isotype small -->
@@ -648,7 +650,7 @@
               <img src="sprites/LOGO SIN LETRAS.png" alt="Univers Logo" class="h-28 w-auto">
             </div>
           </div>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1">No es una herramienta que programás, es un compañero que entrenás.</h2>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1" data-scroll-reveal>No es una herramienta que programás, es un compañero que entrenás.</h2>
           <div class="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-xl">
             <p class="">En el corazón de la era de la IA, la diferencia no está en quién tiene acceso a la tecnología, sino en cómo se integra con la cultura de tu empresa.</p>
             <p class="">Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y evoluciona con cada interacción.</p>
@@ -674,10 +676,10 @@
 
     <!-- 💰 Packages -->
     <div class="p-8 sm:p-12 lg:p-24 bg-white" id="precios">
-      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal">Inversión en Crecimiento</h2>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal" data-scroll-reveal>Inversión en Crecimiento</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Básico -->
-        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1">
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1" data-scroll-reveal>
           <h3 class="font-headline font-bold text-2xl mb-2">Básico</h3>
           <p class="text-on-surface-variant mb-8">Para startups en etapa temprana.</p>
           <div class="text-4xl font-headline font-black mb-10">$299<span class="text-sm font-medium text-on-surface-variant">/mes</span></div>
@@ -689,7 +691,7 @@
           <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Elegir Plan</a>
         </div>
         <!-- Profesional -->
-        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2">
+        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2" data-scroll-reveal>
           <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Popular</div>
           <h3 class="font-headline font-bold text-2xl mb-2">Profesional</h3>
           <p class="text-on-surface-variant mb-8">Optimizado para equipos activos.</p>
@@ -703,7 +705,7 @@
           <a class="block text-center bg-primary-container text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition-all shadow-lg" href="#">Elegir Plan</a>
         </div>
         <!-- Enterprise -->
-        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3">
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3" data-scroll-reveal>
           <h3 class="font-headline font-bold text-2xl mb-2">Enterprise</h3>
           <p class="text-on-surface-variant mb-8">Soluciones a medida para escala masiva.</p>
           <div class="text-4xl font-headline font-black mb-10">Personalizado</div>
@@ -718,7 +720,7 @@
     </div>
 
     <!-- 🛡️ Social Proof -->
-    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos">
+    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos" data-scroll-reveal>
       <div class="flex flex-col gap-2 text-center md:text-left">
         <p class="text-3xl lg:text-4xl font-headline font-black">Ahorro de <span class="counter-value">+120h</span>/mes</p>
         <p class="text-white/60 uppercase tracking-widest text-xs font-bold">Por cada agente implementado</p>
@@ -744,7 +746,7 @@
         <canvas id="pensativo-sprite" class="w-full h-full"></canvas>
         <span id="pensativo-q" style="position:absolute;top:-16px;right:-12px;font-size:36px;font-weight:900;color:#fff;background:linear-gradient(135deg,#5d5fef,#edb1ff);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:none;pointer-events:none;box-shadow:0 4px 20px rgba(93,95,239,0.5);line-height:1;">?</span>
       </div>
-      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal">Preguntas Frecuentes</h2>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal" data-scroll-reveal>Preguntas Frecuentes</h2>
       <div class="max-w-3xl mx-auto space-y-4">
         <details class="group border border-outline/10 rounded-2xl overflow-hidden" open="">
           <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
@@ -843,59 +845,76 @@
 
 <script>
   // ═══════════════════════════════════════════════════════
-  // Brand reveal overlay — blindado, with spinner cleanup
+  // Brand reveal — video background + logo FLIP to navbar
   // ═══════════════════════════════════════════════════════
   (function() {
     var O = document.getElementById('brand-reveal');
-    var L = document.getElementById('brand-logo');
-    var S = document.getElementById('brand-spinner');
-    if (!O || !L) return;
+    var logoEl = document.getElementById('brand-logo');
+    var videoEl = document.getElementById('brand-video');
+    if (!O || !logoEl || !videoEl) return;
 
-    var START = Date.now();
+    var navLogo = document.querySelector('.logo-transition-container img');
 
     function hideReveal() {
-      if (S) S.style.display = 'none';
-      O.style.transition = 'opacity 0.5s ease';
+      O.style.transition = 'opacity 0.6s ease';
       O.style.opacity = '0';
-      setTimeout(function() { O.style.display = 'none'; }, 500);
+      setTimeout(function() {
+        O.style.display = 'none';
+        if (videoEl) videoEl.pause();
+      }, 600);
     }
 
-    // Esperar que el DOM e imágenes carguen, luego FLIP
     setTimeout(function() {
-      var navLogo = document.querySelector('.logo-transition-container img');
+      // Start video at second 2, play until second 6
+      videoEl.currentTime = 2;
+      videoEl.volume = 0;
+      gsap.to(videoEl, { opacity: 1, duration: 1.2, ease: 'power2.out' });
+      videoEl.play().catch(function(){});
 
-      if (!navLogo) {
-        hideReveal();
-        return;
-      }
+      // Stop at second 6
+      var stopAt6 = function() {
+        if (videoEl.currentTime >= 6) {
+          videoEl.pause();
+          videoEl.removeEventListener('timeupdate', stopAt6);
+        }
+      };
+      videoEl.addEventListener('timeupdate', stopAt6);
 
-      // FLIP: calcular delta desde centro actual al centro del nav
-      var nR = navLogo.getBoundingClientRect();
-      var lR = L.getBoundingClientRect();
-      var dx = (nR.left + nR.width/2) - (lR.left + lR.width/2);
-      var dy = (nR.top + nR.height/2) - (lR.top + lR.height/2);
-      var sc = Math.min(nR.width / L.width, 0.5);
+      // Logo appears with glow
+      gsap.fromTo(logoEl,
+        { opacity: 0, scale: 0.3, filter: 'drop-shadow(0 0 100px rgba(93,95,239,1))' },
+        { opacity: 1, scale: 1, duration: 1.5, ease: 'power4.out', delay: 0.4 }
+      );
 
-      L.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease';
-      L.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(' + sc + ')';
-      L.style.opacity = '0.5';
+      // Logo glow pulse then FLIP to navbar
+      gsap.to(logoEl, {
+        filter: 'drop-shadow(0 0 80px rgba(93,95,239,1))',
+        duration: 0.5,
+        delay: 3.2,
+        onComplete: function() {
+          if (!navLogo) { hideReveal(); return; }
 
-      setTimeout(function() {
-        if (S) S.style.display = 'none';
-        O.style.transition = 'opacity 0.5s ease';
-        O.style.opacity = '0';
-        setTimeout(function() { O.style.display = 'none'; }, 500);
-      }, 800);
-    }, 1500);
+          var nR = navLogo.getBoundingClientRect();
+          var lR = logoEl.getBoundingClientRect();
 
-    // Safety: si a los 8s el overlay sigue visible, forzar cierre
+          var dx = (nR.left + nR.width/2) - (lR.left + lR.width/2);
+          var dy = (nR.top + nR.height/2) - (lR.top + lR.height/2);
+          var sc = Math.min(nR.width / lR.width, 0.5);
+
+          gsap.to(logoEl, {
+            x: dx, y: dy, scale: sc, opacity: 0.4,
+            duration: 0.8, ease: 'power2.inOut',
+            onComplete: hideReveal
+          });
+        }
+      });
+
+    }, 800);
+
+    // Safety: force close at 10s
     setTimeout(function() {
       if (O.style.display !== 'none') hideReveal();
-    }, 8000);
-
-    // Hide spinner if image loads faster than timeout
-    if (L.complete) { if (S) S.style.display = 'none'; }
-    else { L.onload = function() { if (S) S.style.display = 'none'; }; }
+    }, 10000);
   })();
 
   // ═══════════════════════════════════════════════════════
@@ -1034,13 +1053,13 @@
   // Hero sprite — above fold (direct create)
   createSprite('astronaut-sprite', 'sprites/hero-robot.png', {
     frameW: 215, frameH: 463, cols: 12, totalFrames: 82, duration: 45,
-    displayW: 645, displayH: 1389, pauseMs: 5000, containerId: 'sprite-wrapper'
+    displayW: 645, displayH: 1389, pauseMs: 0, loop: true, containerId: 'sprite-wrapper'
   });
 
   // Peeking sprite — lazy loaded
   initSpriteOnVisible('peeking-sprite', 'sprites/services-peeking.png', {
     frameW: 876, frameH: 876, cols: 6, totalFrames: 6, duration: 45,
-    pauseMs: 5000, containerId: 'peeking-float'
+    pauseMs: 0, containerId: 'peeking-float'
   });
 
   // Pensativo sprite — lazy loaded, with custom onFrame for "?" bubble
@@ -1048,7 +1067,7 @@
     var qMark = document.getElementById('pensativo-q');
     initSpriteOnVisible('pensativo-sprite', 'sprites/Pensativospritesheet.png', {
       frameW: 876, frameH: 876, cols: 6, totalFrames: 24, duration: 45,
-      pauseMs: 5000, containerId: 'pensativo-float',
+      pauseMs: 0, containerId: 'pensativo-float',
       onFrame: function(frame, total) {
         if (frame === total - 1 && qMark) {
           qMark.style.transition = 'none';
@@ -1302,5 +1321,87 @@
   })();
 
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <script>
+    // ═══════════════════════════════════════════════════════
+    // Smooth Scroll with Locomotive Scroll
+    // ═══════════════════════════════════════════════════════
+    (function() {
+      var hasLS = typeof LocomotiveScroll !== 'undefined';
+      var hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+      if (!hasLS || !hasGSAP) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Initialize Locomotive Scroll
+      var scrollContainer = document.querySelector('[data-scroll-container]');
+      if (!scrollContainer) {
+        // Fallback: wrap main content
+        scrollContainer = document.querySelector('main') || document.body;
+      }
+
+      var scrollInstance = new LocomotiveScroll({
+        el: scrollContainer,
+        smooth: true,
+        multiplier: 0.8,
+        lerp: 0.05
+      });
+
+      // Sync with GSAP ScrollTrigger
+      scrollInstance.on('scroll', ScrollTrigger.update);
+      ScrollTrigger.scrollerProxy(scrollContainer, {
+        scrollTop: function(value) {
+          return arguments.length ? scrollInstance.scrollTo(value, 0, 0) : scrollInstance.scroll.instance.scroll.y;
+        },
+        getBoundingClientRect: function() {
+          return { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+        }
+      });
+
+      ScrollTrigger.addEventListener('refresh', function() { scrollInstance.update(); });
+      ScrollTrigger.refresh();
+
+      // Scroll reveal — simple, uses existing .reveal class
+      // All elements with .reveal start invisible (opacity:0 in CSS)
+      // This animates them in from bottom when they enter viewport
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        gsap.fromTo(el,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 90%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+      // Speed parallax for images
+      var parallaxEls = document.querySelectorAll('[data-scroll-speed]');
+      parallaxEls.forEach(function(el) {
+        var speed = parseFloat(el.getAttribute('data-scroll-speed')) || 1;
+        var pscroller = scrollInstance ? scrollContainer : window;
+        gsap.to(el, {
+          y: function() { return (1 - speed) * 100; },
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            scroller: pscroller,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+
+      // Expose for manual use
+      window.__universScroll = scrollInstance;
+    })();
+  </script>
 
 </body></html>
