@@ -106,6 +106,10 @@
     }
   </script>
   <style>
+    html { zoom: 0.85; }
+    @supports not (zoom: 0.85) {
+      html { transform: scale(0.85); transform-origin: top center; }
+    }
     body {
       color: #e1e2e7;
       background-color: #6a4c93;
@@ -115,11 +119,20 @@
       background-size: 24px 24px, 100% 100%;
       background-attachment: fixed, fixed;
       background-position: center center, center center;
+      min-height: 100vh;
     }
     .hero-title {
       letter-spacing: -0.04em;
       line-height: 0.85;
     }
+    .type-cursor { display: inline-block; width: 2px; height: 1em; background: white; margin-left: 2px; vertical-align: middle; animation: blink 0.8s step-end infinite; }
+    .blur-word { display: inline; filter: blur(20px); opacity: 0; }
+    .blur-word.animated { animation: blurReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes blurReveal {
+      0% { filter: blur(20px); opacity: 0; transform: translateY(20px); }
+      100% { filter: blur(0); opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink { 50% { opacity: 0; } }
     .dot-grid {
       background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
       background-size: 24px 24px;
@@ -199,6 +212,24 @@
       0%, 100% { top: -16px; }
       50% { top: -24px; }
     }
+    /* ----- Robot exiting phone effects ----- */
+    @keyframes pulse-ring {
+      0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.9; }
+      100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.85; }
+    }
+    .glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
+    .pulse-ring { animation: pulse-ring 3s ease-out infinite; }
+
+    @keyframes qMark-float {
+      0%, 100% { top: -16px; }
+      50% { top: -26px; }
+    }
+    .qMark-floating { animation: qMark-float 1.6s ease-in-out infinite; }
+
     @keyframes ctaGlow {
       0%, 100% { box-shadow: 0 0 20px rgba(93, 95, 239, 0.2); }
       50% { box-shadow: 0 0 35px rgba(93, 95, 239, 0.5); }
@@ -376,17 +407,15 @@
 </head>
 <body class="font-sans text-on-background overflow-x-hidden min-h-screen">
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
-  <!-- Brand reveal overlay — video background + logo FLIP -->
+  <!-- Brand reveal overlay — logo FLIP -->
   <div id="brand-reveal" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:#111417;overflow:hidden;">
-    <!-- Video background (muted, plays once) -->
-    <video id="brand-video" src="sprites/Nubes_moradas_arremolinándose_en…_202606011137.mp4" muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;"></video>
     <!-- Logo PNG -->
     <div id="brand-logo-container" style="position:relative;display:flex;flex-direction:column;align-items:center;">
       <img id="brand-logo" src="sprites/Logo univers sin fondo.png" alt="Univers" style="width:clamp(200px,28vw,360px);height:auto;opacity:0;filter:drop-shadow(0 0 60px rgba(93,95,239,0.8));">
     </div>
   </div>
   <!-- Full-page background overlay -->
-  <div class="fixed inset-0 w-full h-full pointer-events-none z-0" style="background-image: url('sprites/descarga (2).webp'); background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.15;"></div>
+  <div class="fixed inset-0 w-full h-full pointer-events-none z-0" style="background-image: url('sprites/nubes.webp'); background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.15;"></div>
 
 <!-- BEGIN: Static Navigation -->
 <nav class="w-full px-4 sm:px-6 transition-opacity duration-300 py-4" id="static-nav" role="navigation" aria-label="Navegación principal">
@@ -394,7 +423,7 @@
     <div class="flex items-center">
       <div class="logo-transition-container">
         <!-- REPLACE: Tu isotype real -->
-        <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-12 w-auto" onerror="this.style.display='none';document.getElementById('nav-logo-fallback')?.classList.add('active');">
+        <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-12 w-auto" onerror="this.style.display='none';document.getElementById('nav-logo-fallback')?.classList.add('active');" style="border-radius: 8px;">
         <div class="logo-fallback nav-fallback" id="nav-logo-fallback">U</div>
         <div class="logo-text-wrapper">
           <div class="w-px bg-white/20 h-6"></div>
@@ -403,16 +432,15 @@
       </div>
     </div>
     <div class="hidden lg:flex items-center gap-8 text-sm font-bold uppercase tracking-wider text-white/80">
-      <a class="hover:text-primary transition-colors" href="#agentes">Agentes</a>
+      <a class="hover:text-primary transition-colors" href="#agentes">Productos</a>
       <a class="hover:text-primary transition-colors" href="#precios">Precios</a>
-      <a class="hover:text-primary transition-colors" href="#casos">Casos de Éxito</a>
-      <a class="hover:text-primary transition-colors" href="#faq">FAQ</a>
+      <a class="hover:text-primary transition-colors" href="#casos">Preguntas</a>
     </div>
     <div class="flex items-center gap-6 h-full items-stretch">
       <div class="flex items-center gap-4"></div>
-        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow demo-trigger" href="javascript:void(0)" data-cta="primary">Solicitar Demo</a>
+        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow demo-trigger" href="javascript:void(0)" data-cta="primary">Agendar Demo</a>
         <button class="hamburger-btn flex lg:hidden" id="hamburger-btn" aria-label="Abrir menú" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
     </div>
   </div>
@@ -439,39 +467,41 @@
         <div class="logo-text-wrapper"></div>
     </div>
     <div class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-on-surface-variant h-full">
-      <a class="hover:text-primary transition-colors flex items-center" href="#agentes">Agentes</a>
+      <a class="hover:text-primary transition-colors flex items-center" href="#agentes">Productos</a>
       <a class="hover:text-primary transition-colors flex items-center" href="#precios">Precios</a>
-      <a class="hover:text-primary transition-colors flex items-center" href="#casos">Casos de Éxito</a>
+      <a class="hover:text-primary transition-colors flex items-center" href="#casos">Preguntas</a>
     </div>
     <div class="flex items-center gap-3 h-full items-stretch">
-      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center demo-trigger" href="javascript:void(0)" data-cta="primary">Solicitar Demo</a>
+      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center demo-trigger" href="javascript:void(0)" data-cta="primary">Agendar Demo</a>
     </div>
   </div>
 </div>
 <!-- END: Floating Navigation -->
 
-<main id="main-content" data-scroll-container>
+<main id="main-content" data-scroll-container="">
 <!-- BEGIN: Hero Section -->
 <section class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 px-4 sm:px-6 min-h-screen dot-grid bg-transparent flex items-center" data-parallax="0.15">
   <div class="max-w-7xl mx-auto w-full">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
       <div class="flex-1 z-20 text-center lg:text-left" data-parallax="0.08">
-        <h1 class="font-headline text-[15vw] sm:text-[12vw] lg:text-[160px] hero-title uppercase text-white font-extrabold hero-glow">
-          El Futuro<br>Del Trabajo
-        </h1>
+        <h1 id="hero-title" class="font-headline text-[15vw] sm:text-[12vw] lg:text-[135px] text-white font-extrabold hero-glow" style="line-height:1.00;">
+  <span class="blur-word">DEJA</span><br>
+  <span class="blur-word">DE</span><br>
+  <span class="blur-word">PERDER TUS VENTAS</span>
+</h1>
         <div class="mt-8 lg:mt-16 max-w-xl mx-auto lg:mx-0">
           <p class="text-xl lg:text-2xl text-white/90 leading-relaxed font-medium">
-            Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites.
+            Conectamos WhatsApp, Instagram, Facebook y Telegram con un agente de IA entrenado exclusivamente con tus datos. Responde, agenda y vende en segundos, con la precisión de un sistema robusto y la empatía de tu mejor empleado.
           </p>
           <div class="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
-            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40" href="#agentes" data-cta="secondary">Ver Agentes</a>
-            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm demo-trigger" href="javascript:void(0)" data-cta="primary">Solicitar Demo</a>
+            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm" href="#agentes" data-cta="secondary">Ver cómo funciona</a>
+            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40 cta-glow demo-trigger" href="javascript:void(0)" data-cta="primary">Agendar mi Demo Gratuita</a>
           </div>
         </div>
       </div>
-      <div class="w-full lg:w-[60%] flex items-center justify-center relative h-[500px] lg:h-[750px]">
+      <div class="w-full lg:w-[60%] flex items-center justify-center relative h-[750px] lg:h-[500px]">
         <!-- Astronaut sprite -->
-        <div class="relative z-10 w-full h-full flex items-center justify-center translate-x-[-25%] transition-all duration-700 hover:translate-y-[-10px] hover:scale-105 group">
+        <div class="relative z-10 w-full h-full flex items-center justify-center translate-x-[0%] -translate-y-[200px] transition-all duration-700 hover:-translate-y-[230px] hover:scale-105 group">
           <div class="sprite-container image-glow" id="sprite-wrapper">
             <div class="loading-placeholder">
               <div>
@@ -482,8 +512,7 @@
             <canvas id="astronaut-sprite"></canvas>
           </div>
         </div>
-        <div class="absolute right-0 top-1/2 -translate-y-1/2 h-[85%] w-[90%] bg-gradient-to-br from-white to-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-0 rounded-2xl overflow-hidden">
-          <img src="sprites/Priority signals for urgent messages without panic.webp" class="w-full h-full object-cover blur-[2px] opacity-85" loading="lazy">
+        <div class="absolute right-0 top-[50%] -translate-y-1/2 translate-x-[20%] w-[624px] h-[556px] z-0 hidden lg:block" style="background-image: url('sprites/telefono final final.webp'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
         </div>
       </div>
     </div>
@@ -494,21 +523,21 @@
 <!-- BEGIN: Transition Section -->
 <section class="min-h-[35vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-16 bg-transparent">
   <div class="max-w-4xl mx-auto animate-fade-up">
-    <p class="text-white/60 text-xl md:text-2xl font-medium mb-4">Cada minuto que tu equipo pasa en tareas manuales...</p>
-    <p class="text-white text-3xl md:text-5xl lg:text-6xl font-headline font-black uppercase tracking-tight">estás <span class="text-red-500 animate-pulse" style="text-shadow: 0 0 20px rgba(239,68,68,0.6);">perdiendo</span> ventas y clientes potenciales.</p>
+    <p class="text-white/60 text-xl md:text-2xl font-medium mb-4">Cada minuto que tu equipo pasa respondiendo las mismas preguntas...</p>
+    <p class="text-white text-3xl md:text-5xl lg:text-6xl font-headline font-black uppercase tracking-tight">Estás <span class="text-red-500 animate-pulse" style="text-shadow: 0 0 20px rgba(239,68,68,0.6);">perdiendo</span> ventas y dejando clientes para la competencia.</p>
   </div>
 </section>
 <!-- END: Transition Section -->
 
 <!-- BEGIN: The Capsule -->
 <section class="relative px-4 sm:px-6 lg:px-8 pb-32">
-  <div class="max-w-7xl mx-auto bg-white rounded-4xl lg:rounded-5xl capsule-shadow overflow-hidden text-background">
+  <div class="max-w-screen-2xl mx-auto bg-white rounded-4xl lg:rounded-5xl capsule-shadow overflow-hidden text-background">
 
     <!-- 💥 CAOS Section -->
     <div class="p-8 sm:p-12 lg:p-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-1 reveal" data-scroll-reveal>
-        <span class="inline-block px-4 py-1.5 bg-error/10 text-error-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-error/20">Para equipos de ventas...</span>
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">Tu negocio está COLAPSANDO sin un agente IA</h2>
+      <div class="order-1 reveal" data-scroll-reveal="">
+        <span class="inline-block px-4 py-1.5 bg-error/10 text-error-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-error/20">Para negocios en crecimiento</span>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">Tu negocio está colapsando sin IA</h2>
         <div class="p-6 sm:p-8 bg-surface-container-low rounded-3xl border border-outline/10">
           <p class="text-4xl font-headline font-black text-red-500 mb-2 animate-pulse" style="text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);"><span class="counter-value">42%</span></p>
           <p class="text-on-surface-variant font-medium">de tus clientes abandonan el chat si no hay respuesta en 2 minutos.</p>
@@ -541,15 +570,15 @@
           <video src="sprites/movimiento_de_checks_verdes_202605251318.mp4" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover rounded-[2.5rem]"></video>
         </div>
       </div>
-      <div class="order-1 lg:order-2 reveal reveal-delay-1" data-scroll-reveal>
-        <span class="inline-block px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-green-500/20">Mensajes contestados, citas anotadas.</span>
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">0 MENSAJES SIN RESPONDER</h2>
+      <div class="order-1 lg:order-2 reveal reveal-delay-1" data-scroll-reveal="">
+        <span class="inline-block px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-green-500/20">Mensajes contestados, citas agendadas, mente tranquila.</span>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">0 mensajes sin responder. 100% confiable.</h2>
         <div class="p-6 sm:p-8 bg-primary-container/5 rounded-3xl border border-primary-container/10 mb-8">
-          <p class="text-4xl font-headline font-black text-green-400 mb-2"><span class="counter-value">100%</span></p>
-          <p class="text-on-surface-variant font-medium">de tasa de respuesta automatizada con tono humano.</p>
+          <p class="text-4xl font-headline font-black text-green-400 mb-2">Cero Alucinaciones</p>
+          <p class="text-on-surface-variant font-medium">Gracias a nuestra tecnología RAG y base de datos SQL, el agente solo usa la información real de tu negocio.</p>
         </div>
         <a class="inline-flex items-center gap-4 bg-primary-container text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center demo-trigger" href="javascript:void(0)" data-cta="primary">
-          Solicitar demo →
+          Quiero esta tranquilidad para mi negocio →
         </a>
       </div>
     </div>
@@ -564,100 +593,116 @@
         </div>
         <canvas id="peeking-sprite" class="w-full h-full"></canvas>
       </div>
-      <div class="text-center mb-16 reveal" data-scroll-reveal>
-        <span class="inline-block px-4 py-1.5 bg-primary-container/10 text-primary-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-primary-container/20">Expertise</span>
-        <h2 class="font-headline font-black text-4xl lg:text-5xl uppercase">Nuestros Servicios</h2>
+      <div class="text-center mb-16 reveal" data-scroll-reveal="">
+        <span class="inline-block px-4 py-1.5 bg-primary-container/10 text-primary-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-primary-container/20">Nuestro Expertise</span>
+        <h2 class="font-headline font-black text-4xl lg:text-5xl uppercase">Todo lo que necesitas para escalar sin contratar más personal</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="services-grid">
         <!-- Service 1 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">support_agent</span>
           </div>
-          <h3 class="font-headline font-bold text-xl mb-3 text-white">Agentes de atención general</h3>
-          <p class="text-sm text-white/90 leading-relaxed">Soporte multilingüe 24/7 que resuelve dudas frecuentes y filtra leads calificados en segundos.</p>
+          <h3 class="font-headline font-bold text-xl mb-2 text-white">Agentes Multicanal 24/7</h3>
+          <p class="text-sm text-white/70 mb-4 italic">Atención que no duerme.</p>
+          <p class="text-sm text-white/90 leading-relaxed">Soporte en WhatsApp, Instagram, Facebook y Telegram que resuelve dudas, filtra leads y deriva a humanos solo cuando es estrictamente necesario.</p>
         </div>
         <!-- Service 2 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">event_available</span>
           </div>
-          <h3 class="font-headline font-bold text-xl mb-3 text-white">Agentes de citas</h3>
-          <p class="text-sm leading-relaxed text-white/90">Sincronización total con tu calendario para agendar, reprogramar y confirmar reuniones automáticamente.</p>
+          <h3 class="font-headline font-bold text-xl mb-2 text-white">Agentes de Citas y Agendas</h3>
+          <p class="text-sm text-white/70 mb-4 italic">Tu calendario, en piloto automático.</p>
+          <p class="text-sm leading-relaxed text-white/90">Sincronización total para agendar, reprogramar y enviar recordatorios de reuniones sin que tú muevas un dedo.</p>
         </div>
         <!-- Service 3 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">settings_suggest</span>
           </div>
-          <h3 class="font-headline font-bold text-xl mb-3 text-white">Automatizaciones a medida</h3>
-          <p class="text-sm text-white/90 leading-relaxed">Diseñamos flujos de trabajo personalizados que conectan tus herramientas actuales con el poder de la IA.</p>
+          <h3 class="font-headline font-bold text-xl mb-2 text-white">Automatizaciones a Medida</h3>
+          <p class="text-sm text-white/70 mb-4 italic">Adiós a las tareas repetitivas.</p>
+          <p class="text-sm text-white/90 leading-relaxed">Diseñamos flujos de trabajo que conectan tus herramientas actuales (CRM, hojas de cálculo) con el poder de la IA.</p>
         </div>
         <!-- Service 4 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">psychology</span>
           </div>
-          <h3 class="font-headline font-bold text-xl mb-3 text-white">Consultoría Estratégica</h3>
-          <p class="text-sm leading-relaxed text-white/90">Analizamos tu modelo de negocio para identificar los puntos de mayor impacto para implementar IA.</p>
+          <h3 class="font-headline font-bold text-xl mb-2 text-white">Consultoría Estratégica Honesta</h3>
+          <p class="text-sm text-white/70 mb-4 italic">Claridad antes que tecnología.</p>
+          <p class="text-sm leading-relaxed text-white/90">Analizamos tu modelo de negocio para decirte exactamente dónde la IA te ahorrará dinero, y dónde no la necesitas.</p>
         </div>
       </div>
     </div>
 
-    <div class="bg-slate-50 p-8 sm:p-12 lg:p-24 border-y border-outline/10">
-      <div class="text-center mb-16 reveal" data-scroll-reveal>
-        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Integrado con lo que ya usas</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12 items-center justify-items-center opacity-90">
-          <span class="font-headline font-bold text-xl lg:text-2xl text-background">Chatwoot</span>
-          <span class="font-headline font-bold text-xl lg:text-2xl text-background">Baserow</span>
-          <span class="font-headline font-bold text-xl lg:text-2xl text-background">VPS</span>
-          <span class="font-headline font-bold text-xl lg:text-2xl text-background">N8N</span>
-          <span class="font-headline font-bold text-xl lg:text-2xl text-background">Typebot</span>
-          <span class="font-headline font-bold text-xl lg:text-2xl text-background">OpenAI</span>
-        </div>
+    <div class="bg-slate-50 py-4 border-y border-outline/10 overflow-hidden">
+      <div class="text-center mb-16 reveal" data-scroll-reveal="">
+        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Se conecta con las herramientas que ya usás</h3>
       </div>
+      <div class="flex gap-16 lg:gap-24 items-center" style="animation: marquee 20s linear infinite;">
+        <img src="iconos/Chatwoot--Streamline-Simple-Icons.svg" alt="Chatwoot" class="h-10 w-auto object-contain flex-shrink-0" title="Chatwoot">
+        <img src="iconos/baserow-customized.svg" alt="Baserow" class="h-10 w-auto object-contain flex-shrink-0" title="Baserow">
+        <img src="iconos/N8n--Streamline-Simple-Icons.svg" alt="N8N" class="h-10 w-auto object-contain flex-shrink-0" title="N8N">
+        <img src="iconos/whatsapp-128-svgrepo-com.svg" alt="WhatsApp" class="h-10 w-auto object-contain flex-shrink-0" title="WhatsApp">
+        <img src="iconos/telegram-svgrepo-com.svg" alt="Telegram" class="h-10 w-auto object-contain flex-shrink-0" title="Telegram">
+        <img src="iconos/instagram-logo-facebook-svgrepo-com.svg" alt="Instagram" class="h-10 w-auto object-contain flex-shrink-0" title="Instagram">
+        <img src="iconos/facebook-messenger-svgrepo-com.svg" alt="Facebook" class="h-10 w-auto object-contain flex-shrink-0" title="Facebook">
+        <!-- Duplicate set for seamless loop -->
+        <img src="iconos/Chatwoot--Streamline-Simple-Icons.svg" alt="Chatwoot" class="h-10 w-auto object-contain flex-shrink-0" title="Chatwoot">
+        <img src="iconos/baserow-customized.svg" alt="Baserow" class="h-10 w-auto object-contain flex-shrink-0" title="Baserow">
+        <img src="iconos/N8n--Streamline-Simple-Icons.svg" alt="N8N" class="h-10 w-auto object-contain flex-shrink-0" title="N8N">
+        <img src="iconos/whatsapp-128-svgrepo-com.svg" alt="WhatsApp" class="h-10 w-auto object-contain flex-shrink-0" title="WhatsApp">
+        <img src="iconos/telegram-svgrepo-com.svg" alt="Telegram" class="h-10 w-auto object-contain flex-shrink-0" title="Telegram">
+        <img src="iconos/instagram-logo-facebook-svgrepo-com.svg" alt="Instagram" class="h-10 w-auto object-contain flex-shrink-0" title="Instagram">
+        <img src="iconos/facebook-messenger-svgrepo-com.svg" alt="Facebook" class="h-10 w-auto object-contain flex-shrink-0" title="Facebook">
+      </div>
+    </div>
+
+    <style>
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    </style>
+
+    <div class="bg-white p-8 sm:p-12 lg:p-24">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal>
-          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">01</div>
-          <h4 class="font-bold mb-2">Análisis de flujo</h4>
-          <p class="text-sm text-on-surface-variant">Auditamos tus conversaciones actuales para mapear el ADN de tu marca.</p>
+        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal="">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">01</div>
+          <h4 class="font-bold mb-2 text-background">Auditoría de Flujo</h4>
+          <p class="text-sm text-background/60">Mapeamos el "ADN" de tu marca y tus conversaciones actuales para identificar cuellos de botella.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-2" data-scroll-reveal>
-          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">02</div>
-          <h4 class="font-bold mb-2">Entrenamiento IA</h4>
-          <p class="text-sm text-on-surface-variant">Alimentamos al agente con tu base de conocimientos y catálogos.</p>
+        <div class="relative text-center lg:text-left reveal reveal-delay-2" data-scroll-reveal="">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">02</div>
+          <h4 class="font-bold mb-2 text-background">Entrenamiento con Tus Datos</h4>
+          <p class="text-sm text-background/60">Alimentamos al agente con tu base de conocimientos, precios y catálogos. Nada genérico.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-3" data-scroll-reveal>
-          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">03</div>
-          <h4 class="font-bold mb-2">Despliegue</h4>
-          <p class="text-sm text-on-surface-variant">Conectamos tu infraestructura (WhatsApp, Telegram, Web).</p>
+        <div class="relative text-center lg:text-left reveal reveal-delay-3" data-scroll-reveal="">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">03</div>
+          <h4 class="font-bold mb-2 text-background">Despliegue Multicanal</h4>
+          <p class="text-sm text-background/60">Conectamos la IA a tu WhatsApp, redes y web en días, no en meses.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal>
-          <div class="text-5xl lg:text-6xl font-headline font-black text-outline/20 mb-4">04</div>
-          <h4 class="font-bold mb-2">Optimización</h4>
-          <p class="text-sm text-on-surface-variant">Monitoreo continuo para mejorar la conversión de leads.</p>
+        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal="">
+          <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">04</div>
+          <h4 class="font-bold mb-2 text-background">Optimización Continua</h4>
+          <p class="text-sm text-background/60">Monitoreamos las conversaciones para refinar el tono y aumentar tu tasa de conversión mes a mes.</p>
         </div>
       </div>
     </div>
 
     <!-- BEGIN: Editorial Section -->
-    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal" data-scroll-reveal>
+    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal" data-scroll-reveal="">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <div class="order-2 lg:order-1">
-          <!-- REPLACE: Isotype small -->
-          <div class="mb-10 lg:mb-12 -ml-8 sm:-ml-12 lg:-ml-24 -translate-x-[10%]">
-            <div class="bg-black/90 rounded-r-xl pl-8 sm:pl-12 lg:pl-24 pr-8 py-4 inline-block">
-              <img src="sprites/LOGO SIN LETRAS.png" alt="Univers Logo" class="h-28 w-auto">
-            </div>
-          </div>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1" data-scroll-reveal>No es una herramienta que programás, es un compañero que entrenás.</h2>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1" data-scroll-reveal="">No es un bot que programás. Es un compañero que entrenás.</h2>
           <div class="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-xl">
-            <p class="">En el corazón de la era de la IA, la diferencia no está en quién tiene acceso a la tecnología, sino en cómo se integra con la cultura de tu empresa.</p>
-            <p class="">Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y evoluciona con cada interacción.</p>
+            <p class="">En la era de la IA, la ventaja competitiva no es tener la tecnología, sino saber integrarla a tu cultura. Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y, gracias a nuestra arquitectura robusta (RAG + SQL), garantiza que cada respuesta sea precisa y segura.</p>
           </div>
           <div class="mt-12">
             <a class="inline-flex items-center gap-4 bg-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center demo-trigger" href="javascript:void(0)" data-cta="primary">
-              Solicitar demo →
+              Ver cómo se entrena a tu agente →
             </a>
           </div>
         </div>
@@ -676,63 +721,66 @@
 
     <!-- 💰 Packages -->
     <div class="p-8 sm:p-12 lg:p-24 bg-white" id="precios">
-      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal" data-scroll-reveal>Inversión en Crecimiento</h2>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal" data-scroll-reveal="">Inversión en Crecimiento</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Básico -->
-        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1" data-scroll-reveal>
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1" data-scroll-reveal="">
           <h3 class="font-headline font-bold text-2xl mb-2">Básico</h3>
-          <p class="text-on-surface-variant mb-8">Para startups en etapa temprana.</p>
+          <p class="text-on-surface-variant mb-8">Para emprendedores y PyMEs en crecimiento.</p>
           <div class="text-4xl font-headline font-black mb-10">$299<span class="text-sm font-medium text-on-surface-variant">/mes</span></div>
           <ul class="space-y-4 mb-10 text-sm flex-grow">
-            <li class="flex items-center gap-3">✓ 1 Agente de Ventas</li>
+            <li class="flex items-center gap-3">✓ 1 Agente de IA Multicanal</li>
             <li class="flex items-center gap-3">✓ 1,000 conversaciones/mes</li>
-            <li class="flex items-center gap-3">✓ Integración WhatsApp</li>
+            <li class="flex items-center gap-3">✓ Integración WhatsApp e Instagram</li>
+            <li class="flex items-center gap-3">✓ Base de conocimientos personalizada</li>
           </ul>
-          <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Elegir Plan</a>
+          <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Elegir Plan Básico</a>
         </div>
         <!-- Profesional -->
-        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2" data-scroll-reveal>
-          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Popular</div>
+        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2" data-scroll-reveal="">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Más elegido</div>
           <h3 class="font-headline font-bold text-2xl mb-2">Profesional</h3>
-          <p class="text-on-surface-variant mb-8">Optimizado para equipos activos.</p>
+          <p class="text-on-surface-variant mb-8">Para equipos de ventas activos que necesitan escalar.</p>
           <div class="text-4xl font-headline font-black mb-10">$599<span class="text-sm font-medium text-on-surface-variant">/mes</span></div>
           <ul class="space-y-4 mb-10 text-sm flex-grow">
-            <li class="flex items-center gap-3 font-bold text-primary-container">✓ 3 Agentes Especializados</li>
+            <li class="flex items-center gap-3 font-bold text-primary-container">✓ 3 Agentes Especializados (Ventas, Soporte, Citas)</li>
             <li class="flex items-center gap-3">✓ 5,000 conversaciones/mes</li>
-            <li class="flex items-center gap-3">✓ CRM Sync (Salesforce/Hubspot)</li>
+            <li class="flex items-center gap-3">✓ Sincronización con CRM y Calendarios</li>
+            <li class="flex items-center gap-3">✓ Tecnología RAG avanzada (Cero alucinaciones)</li>
             <li class="flex items-center gap-3">✓ Soporte Prioritario</li>
           </ul>
-          <a class="block text-center bg-primary-container text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition-all shadow-lg" href="#">Elegir Plan</a>
+          <a class="block text-center bg-primary-container text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition-all shadow-lg cta-glow" href="#">Elegir Plan Profesional</a>
         </div>
         <!-- Enterprise -->
-        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3" data-scroll-reveal>
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3" data-scroll-reveal="">
           <h3 class="font-headline font-bold text-2xl mb-2">Enterprise</h3>
-          <p class="text-on-surface-variant mb-8">Soluciones a medida para escala masiva.</p>
-          <div class="text-4xl font-headline font-black mb-10">Personalizado</div>
+          <p class="text-on-surface-variant mb-8">Para operaciones que requieren escala masiva y seguridad dedicada.</p>
+          <div class="text-4xl font-headline font-black mb-10">A Medida</div>
           <ul class="space-y-4 mb-10 text-sm flex-grow">
             <li class="flex items-center gap-3">✓ Agentes Ilimitados</li>
-            <li class="flex items-center gap-3">✓ Infraestructura dedicada</li>
-            <li class="flex items-center gap-3">✓ Acuerdos de Nivel de Servicio (SLA)</li>
+            <li class="flex items-center gap-3">✓ Infraestructura VPS dedicada</li>
+            <li class="flex items-center gap-3">✓ SLA de disponibilidad y Seguridad de datos</li>
+            <li class="flex items-center gap-3">✓ Consultoría de procesos avanzada</li>
           </ul>
-          <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Contactar Ventas</a>
+          <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Contactar a Ventas</a>
         </div>
       </div>
     </div>
 
     <!-- 🛡️ Social Proof -->
-    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos" data-scroll-reveal>
+    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos" data-scroll-reveal="">
       <div class="flex flex-col gap-2 text-center md:text-left">
-        <p class="text-3xl lg:text-4xl font-headline font-black">Ahorro de <span class="counter-value">+120h</span>/mes</p>
+        <p class="text-3xl lg:text-4xl font-headline font-black">+120h/mes<span class="text-lg font-medium text-white/60"> ahorradas en tareas administrativas</span></p>
         <p class="text-white/60 uppercase tracking-widest text-xs font-bold">Por cada agente implementado</p>
       </div>
       <div class="flex items-center gap-8 lg:gap-12 opacity-50 flex-wrap justify-center">
-        <!-- REPLACE: Logos de integraciones como imágenes -->
         <span class="font-headline font-bold text-lg text-white/70">Chatwoot</span>
         <span class="font-headline font-bold text-lg text-white/70">N8N</span>
-        <span class="font-headline font-bold text-lg text-white/70">Typebot</span>
-        <span class="font-headline font-bold text-lg text-white/70">OpenAI</span>
+        <span class="font-headline font-bold text-lg text-white/70">Contabo</span>
+        <span class="font-headline font-bold text-lg text-white/70">Baserow</span>
+        <span class="font-headline font-bold text-lg text-white/70">Supabase</span>
       </div>
-       <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center demo-trigger" href="javascript:void(0)" data-cta="primary">Acceso Beta Limitado</a>
+      <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center demo-trigger" href="javascript:void(0)" data-cta="primary">Obtener Acceso a la Demo Beta</a>
     </div>
 
     <!-- ❓ FAQ -->
@@ -746,42 +794,42 @@
         <canvas id="pensativo-sprite" class="w-full h-full"></canvas>
         <span id="pensativo-q" style="position:absolute;top:-16px;right:-12px;font-size:36px;font-weight:900;color:#fff;background:linear-gradient(135deg,#5d5fef,#edb1ff);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:none;pointer-events:none;box-shadow:0 4px 20px rgba(93,95,239,0.5);line-height:1;">?</span>
       </div>
-      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal" data-scroll-reveal>Preguntas Frecuentes</h2>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal" data-scroll-reveal="">Resolvemos tus dudas</h2>
       <div class="max-w-3xl mx-auto space-y-4">
         <details class="group border border-outline/10 rounded-2xl overflow-hidden" open="">
-          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
-            ¿Es difícil de configurar?
-            <span class="group-open:rotate-180 transition-transform">↓</span>
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
+            ¿Es difícil de configurar? ¿Necesito saber de programación?
+            <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
           </summary>
           <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
-            Para nada. Nuestro equipo se encarga de la implementación técnica. Tú solo nos das la información de tu negocio y nosotros entrenamos al agente.
+            Para nada. Nuestro equipo se encarga de toda la implementación técnica. Vos solo nos compartís la información de tu negocio (PDFs, webs, manuales) y nosotros entrenamos y desplegamos el agente por vos.
           </div>
         </details>
         <details class="group border border-outline/10 rounded-2xl overflow-hidden">
-          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
-            ¿El agente suena como un robot?
-            <span class="group-open:rotate-180 transition-transform">↓</span>
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
+            ¿El agente suena como un robot o inventa cosas?
+            <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
           </summary>
           <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
-            Utilizamos modelos de lenguaje avanzados (GPT-4o) afinados con tu propio estilo de comunicación para asegurar un tono humano y empático.
+            Utilizamos modelos de lenguaje avanzados afinados con tu estilo de comunicación. Además, nuestra tecnología RAG (Retrieval-Augmented Generation) obliga al agente a responder solo con la información real de tu base de datos, eliminando las "alucinaciones" típicas de otras IAs.
           </div>
         </details>
         <details class="group border border-outline/10 rounded-2xl overflow-hidden">
-          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
-            ¿En qué idiomas puede atender?
-            <span class="group-open:rotate-180 transition-transform">↓</span>
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
+            ¿En qué canales puede atender mi negocio?
+            <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
           </summary>
           <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
-            Nuestros agentes son políglotas nativos. Pueden detectar y responder en más de 50 idiomas automáticamente.
+            Actualmente integramos WhatsApp, Instagram, Facebook y Telegram de forma nativa, unificando toda la atención en un solo cerebro digital.
           </div>
         </details>
         <details class="group border border-outline/10 rounded-2xl overflow-hidden">
-          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low transition-colors">
-            ¿Puedo probarlo antes de pagar?
-            <span class="group-open:rotate-180 transition-transform">↓</span>
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
+            ¿Puedo probarlo antes de comprometerme?
+            <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
           </summary>
           <div class="p-6 text-on-surface-variant text-sm border-t border-outline/5">
-            Sí. Ofrecemos una prueba gratuita de 14 días con todas las funcionalidades del plan Profesional. Sin tarjeta de crédito.
+            Sí. Ofrecemos una consultoría inicial gratuita para evaluar tu caso, y una prueba de concepto de 14 días con las funcionalidades del plan Profesional. Sin necesidad de tarjeta de crédito.
           </div>
         </details>
       </div>
@@ -799,42 +847,117 @@
   <div class="modal-content">
     <button class="modal-close" id="modal-close-btn" aria-label="Cerrar formulario">✕</button>
     <div class="modal-form" id="modal-form">
-      <h2>Solicitar Demo</h2>
-      <p class="desc">Completá el formulario y nos pondremos en contacto para mostrarte cómo Univers puede transformar tu equipo de ventas.</p>
-      <form id="demo-form" novalidate>
+      <h2>Agendá tu Demo Personalizada</h2>
+      <p class="desc">Completá el formulario y te mostraremos en vivo cómo un agente de IA entrenado con tus datos puede transformar la atención de tu negocio.</p>
+      <form id="demo-form" novalidate="">
         <div class="form-group">
-          <label for="form-nombre">Nombre</label>
-          <input type="text" id="form-nombre" name="nombre" placeholder="Tu nombre completo" required>
+          <label for="form-nombre">Nombre completo</label>
+          <input type="text" id="form-nombre" name="nombre" placeholder="Tu nombre completo" required="">
         </div>
         <div class="form-group">
-          <label for="form-email">Email</label>
-          <input type="email" id="form-email" name="email" placeholder="tu@email.com" required>
+          <label for="form-email">Email corporativo</label>
+          <input type="email" id="form-email" name="email" placeholder="tu@email.com" required="">
         </div>
         <div class="form-group">
-          <label for="form-empresa">Empresa</label>
-          <input type="text" id="form-empresa" name="empresa" placeholder="Nombre de tu empresa" required>
+          <label for="form-empresa">Nombre de tu Empresa</label>
+          <input type="text" id="form-empresa" name="empresa" placeholder="Nombre de tu empresa" required="">
         </div>
-        <button class="modal-submit" type="submit" id="modal-submit-btn">Enviar solicitud</button>
+        <div class="form-group">
+          <label for="form-dolor">¿Cuál es tu mayor dolor hoy?</label>
+          <select id="form-dolor" name="dolor" required="" style="width:100%;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:15px;outline:none;transition:border-color 0.2s;box-sizing:border-box;">
+            <option value="" disabled="" selected="">Seleccioná una opción</option>
+            <option value="responder-tarde">Responder tarde</option>
+            <option value="tareas-repetitivas">Tareas repetitivas</option>
+            <option value="no-se-por-donde-empezar">No sé por dónde empezar</option>
+          </select>
+        </div>
+        <button class="modal-submit cta-glow" type="submit" id="modal-submit-btn">Enviar solicitud de Demo</button>
         <div class="modal-error" id="modal-error"></div>
       </form>
     </div>
     <div class="modal-success" id="modal-success">
       <div class="modal-success-icon">✓</div>
       <h2>¡Solicitud enviada!</h2>
-      <p class="desc" style="margin-bottom:0;">Gracias por tu interés. Nuestro equipo se pondrá en contacto con vos en las próximas 24 horas hábiles.</p>
+      <p class="desc" style="margin-bottom:0;">Gracias por tu interés. Nuestro equipo te contactará en las próximas 24 horas hábiles para coordinar la demostración.</p>
     </div>
   </div>
 </div>
 <!-- END: Demo Modal -->
 
 <!-- BEGIN: Footer -->
-<footer class="bg-surface-container-low border-t border-white/10 py-10 px-4 sm:px-6" role="contentinfo">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    <p class="text-white/50 text-sm">© 2026 Univers. Todos los derechos reservados.</p>
-    <nav aria-label="Enlaces legales" class="flex gap-6">
-      <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Privacidad</a>
-      <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Términos</a>
-    </nav>
+<footer class="bg-surface-container-low border-t border-white/10 pt-16 pb-8 px-4 sm:px-6" role="contentinfo">
+  <div class="max-w-7xl mx-auto">
+    <!-- Top: 4 columnas -->
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers" class="h-10 w-auto" onerror="this.style.display='none';this.nextElementSibling?.classList.add('active');">
+          <div class="logo-fallback nav-fallback" style="width:40px;height:40px;font-size:14px;">U</div>
+          <span class="font-headline text-white text-xl tracking-[0.25em] uppercase font-extralight">Univers</span>
+        </div>
+        <p class="text-white/60 text-sm leading-relaxed mb-6 max-w-xs">
+          Tu equipo de soporte y ventas, potenciado por IA 24/7. Ecosistema de agentes para escalar sin límites.
+        </p>
+        <!-- Social icons -->
+        <div class="flex items-center gap-3">
+          <a href="#" aria-label="Discord" class="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-container/20 border border-white/10 flex items-center justify-center transition-all group">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-white/70 group-hover:text-primary transition-colors"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
+          </a>
+          <a href="#" aria-label="Twitter / X" class="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-container/20 border border-white/10 flex items-center justify-center transition-all group">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-white/70 group-hover:text-primary transition-colors"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-container/20 border border-white/10 flex items-center justify-center transition-all group">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-white/70 group-hover:text-primary transition-colors"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-container/20 border border-white/10 flex items-center justify-center transition-all group">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-white/70 group-hover:text-primary transition-colors"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Producto -->
+      <div>
+        <h4 class="font-headline font-bold text-white text-sm uppercase tracking-widest mb-5">Navegacion</h4>
+        <ul class="space-y-3">
+          <li><a href="#agentes" class="text-white/60 hover:text-white text-sm transition-colors">Productos</a></li>
+          <li><a href="#precios" class="text-white/60 hover:text-white text-sm transition-colors">Precios</a></li>
+          <li><a href="#casos" class="text-white/60 hover:text-white text-sm transition-colors">Preguntas</a></li>
+        </ul>
+      </div>
+
+      <!-- Empresa -->
+      <div>
+        <h4 class="font-headline font-bold text-white text-sm uppercase tracking-widest mb-5">Empresa</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Sobre Nosotros</a></li>
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Blog</a></li>
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Carreras</a></li>
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Press</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="font-headline font-bold text-white text-sm uppercase tracking-widest mb-5">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Política de Privacidad</a></li>
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Términos y Condiciones</a></li>
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Cookies</a></li>
+          <li><a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Seguridad</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom: copyright + contacto -->
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-white/50 text-sm text-center md:text-left">© 2024 Univers. Todos los derechos reservados.</p>
+      <a href="mailto:hola@univers.ai" class="text-white/60 hover:text-primary text-sm transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">mail</span>
+        Equipounivers@gmail.com
+      </a>
+    </div>
   </div>
 </footer>
 <!-- END: Footer -->
@@ -845,13 +968,12 @@
 
 <script>
   // ═══════════════════════════════════════════════════════
-  // Brand reveal — video background + logo FLIP to navbar
+  // Brand reveal — logo FLIP to navbar
   // ═══════════════════════════════════════════════════════
   (function() {
     var O = document.getElementById('brand-reveal');
     var logoEl = document.getElementById('brand-logo');
-    var videoEl = document.getElementById('brand-video');
-    if (!O || !logoEl || !videoEl) return;
+    if (!O || !logoEl) return;
 
     var navLogo = document.querySelector('.logo-transition-container img');
 
@@ -860,26 +982,10 @@
       O.style.opacity = '0';
       setTimeout(function() {
         O.style.display = 'none';
-        if (videoEl) videoEl.pause();
       }, 600);
     }
 
     setTimeout(function() {
-      // Start video at second 2, play until second 6
-      videoEl.currentTime = 2;
-      videoEl.volume = 0;
-      gsap.to(videoEl, { opacity: 1, duration: 1.2, ease: 'power2.out' });
-      videoEl.play().catch(function(){});
-
-      // Stop at second 6
-      var stopAt6 = function() {
-        if (videoEl.currentTime >= 6) {
-          videoEl.pause();
-          videoEl.removeEventListener('timeupdate', stopAt6);
-        }
-      };
-      videoEl.addEventListener('timeupdate', stopAt6);
-
       // Logo appears with glow
       gsap.fromTo(logoEl,
         { opacity: 0, scale: 0.3, filter: 'drop-shadow(0 0 100px rgba(93,95,239,1))' },
@@ -1056,10 +1162,27 @@
     displayW: 645, displayH: 1389, pauseMs: 0, loop: true, containerId: 'sprite-wrapper'
   });
 
+  // ═══════════════════════════════════════════════════════
+  // Hero text animation — Option 3: Blur Reveal
+  // ═══════════════════════════════════════════════════════
+  (function() {
+    var words = document.querySelectorAll('.blur-word');
+    if (!words.length) return;
+
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        words.forEach(function(word, i) {
+          word.style.transitionDelay = (i * 0.3) + 's';
+          word.classList.add('animated');
+        });
+      }, 5200);
+    });
+  })();
+
   // Peeking sprite — lazy loaded
   initSpriteOnVisible('peeking-sprite', 'sprites/services-peeking.png', {
     frameW: 876, frameH: 876, cols: 6, totalFrames: 6, duration: 45,
-    pauseMs: 0, containerId: 'peeking-float'
+    pauseMs: 5000, containerId: 'peeking-float'
   });
 
   // Pensativo sprite — lazy loaded, with custom onFrame for "?" bubble
@@ -1067,7 +1190,7 @@
     var qMark = document.getElementById('pensativo-q');
     initSpriteOnVisible('pensativo-sprite', 'sprites/Pensativospritesheet.png', {
       frameW: 876, frameH: 876, cols: 6, totalFrames: 24, duration: 45,
-      pauseMs: 0, containerId: 'pensativo-float',
+      pauseMs: 5000, containerId: 'pensativo-float',
       onFrame: function(frame, total) {
         if (frame === total - 1 && qMark) {
           qMark.style.transition = 'none';
@@ -1077,10 +1200,13 @@
             qMark.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease';
             qMark.style.transform = 'scale(1)';
           });
+          // Add float animation during the 5s pause
+          qMark.classList.add('qMark-floating');
         }
         if (frame === 0 && qMark) {
           qMark.style.transition = 'opacity 0.15s ease';
           qMark.style.opacity = '0';
+          qMark.classList.remove('qMark-floating');
         }
         return true;
       }
@@ -1252,8 +1378,9 @@
         var nombre = document.getElementById('form-nombre').value.trim();
         var email = document.getElementById('form-email').value.trim();
         var empresa = document.getElementById('form-empresa').value.trim();
+        var dolor = document.getElementById('form-dolor').value.trim();
 
-        if (!nombre || !email || !empresa) {
+        if (!nombre || !email || !empresa || !dolor) {
           errorEl.textContent = 'Todos los campos son obligatorios.';
           errorEl.classList.add('active');
           return;
@@ -1269,7 +1396,7 @@
         submitBtn.textContent = 'Enviando...';
 
         // Also send via n8n webhook (fire-and-forget, don't block on success state)
-        var payload = { nombre: nombre, email: email, empresa: empresa };
+        var payload = { nombre: nombre, email: email, empresa: empresa, dolor: dolor };
         fetch('https://n8n.univers.ai/webhook/demo', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
