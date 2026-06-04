@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Términos y Condiciones de Univers. Reglas de uso, planes, pagos y responsabilidades del servicio.">
+  <title>Términos y Condiciones — Univers</title>
+  <link rel="icon" type="image/png" href="sprites/Logo univers sin fondo.png">
+  <link rel="canonical" href="https://univers.ai/terminos">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #e1e2e7;
+      background-color: #6a4c93;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.20) 1.2px, transparent 1.2px),
+        linear-gradient(180deg, #1a1c5e 0%, #6a4c93 50%, #9b8ec4 100%);
+      background-size: 24px 24px, 100% 100%;
+      background-attachment: fixed, fixed;
+      font-family: 'Hanken Grotesk', sans-serif;
+      line-height: 1.6;
+    }
+    .font-headline { font-family: 'Sora', sans-serif; }
+    a { color: #c1c1ff; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #edb1ff; }
+    nav.glass {
+      background: rgba(25, 28, 31, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nav-back {
+      background: #5d5fef;
+      color: #faf7ff;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 0 20px rgba(93, 95, 239, 0.2);
+    }
+    .nav-back:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(93, 95, 239, 0.5); color: #faf7ff; }
+    .hero { padding: 80px 24px 40px; text-align: center; }
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(93, 95, 239, 0.2);
+      border: 1px solid rgba(93, 95, 239, 0.4);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: #c1c1ff;
+    }
+    .hero p.subtitle { font-size: 18px; color: rgba(255, 255, 255, 0.7); max-width: 640px; margin: 0 auto; }
+    .legal-card {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      background: #ffffff;
+      color: #111417;
+      border-radius: 40px;
+      padding: 60px clamp(24px, 5vw, 80px);
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.25);
+    }
+    .legal-card h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 40px 0 14px;
+      color: #111417;
+      scroll-margin-top: 100px;
+    }
+    .legal-card h2:first-of-type { margin-top: 0; }
+    .legal-card p { margin: 0 0 14px; color: #4b5563; font-size: 16px; }
+    .legal-card ul { margin: 0 0 14px; padding-left: 22px; color: #4b5563; }
+    .legal-card li { margin-bottom: 6px; }
+    .legal-card strong { color: #111417; }
+    .legal-card a { color: #5d5fef; font-weight: 600; }
+    .updated { display: inline-block; padding: 6px 14px; background: #f3f4f6; color: #6b7280; border-radius: 9999px; font-size: 13px; font-weight: 600; margin-bottom: 30px; }
+    .toc { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px 24px; margin-bottom: 32px; }
+    .toc-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 12px; }
+    .toc ol { list-style: none; padding: 0; margin: 0; counter-reset: toc; }
+    .toc li { counter-increment: toc; padding: 4px 0; }
+    .toc li::before { content: counter(toc, decimal-leading-zero) ". "; color: #9ca3af; font-weight: 600; margin-right: 8px; }
+    .toc a { color: #111417; font-weight: 500; }
+    .toc a:hover { color: #5d5fef; }
+    .plan-table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 15px; }
+    .plan-table th, .plan-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    .plan-table th { background: #f9fafb; font-family: 'Sora', sans-serif; font-weight: 700; color: #111417; }
+    .plan-table td { color: #4b5563; }
+    footer.site-footer { background: rgba(25, 28, 31, 0.6); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 24px; text-align: center; }
+    footer .footer-links { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-bottom: 16px; font-size: 14px; }
+    footer .footer-links a { color: rgba(255, 255, 255, 0.7); font-weight: 500; }
+    footer .footer-links a:hover { color: #fff; }
+    footer .copyright { color: rgba(255, 255, 255, 0.4); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <nav class="glass fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="sprites/Logo univers sin fondo.png" alt="Univers" class="h-10 w-auto">
+      <span class="font-headline text-white text-xl tracking-[0.25em] uppercase font-extralight">Univers</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <span class="material-symbols-outlined text-base">arrow_back</span>
+      Volver al sitio
+    </a>
+  </nav>
+
+  <section class="hero">
+    <span class="badge">Legal</span>
+    <h1>Términos y Condiciones</h1>
+    <p class="subtitle">Las reglas que rigen el uso del servicio Univers. Al usar Univers, aceptás estos términos.</p>
+  </section>
+
+  <main class="legal-card">
+    <span class="updated">Última actualización: Enero 2026</span>
+
+    <div class="toc">
+      <p class="toc-title">Contenido</p>
+      <ol>
+        <li><a href="#aceptacion">Aceptación de los términos</a></li>
+        <li><a href="#servicio">Descripción del servicio</a></li>
+        <li><a href="#cuenta">Registro y cuenta</a></li>
+        <li><a href="#uso">Uso aceptable</a></li>
+        <li><a href="#planes">Planes y pagos</a></li>
+        <li><a href="#pi">Propiedad intelectual</a></li>
+        <li><a href="#contenido">Contenido del usuario</a></li>
+        <li><a href="#limitacion">Limitación de responsabilidad</a></li>
+        <li><a href="#suspension">Suspensión y terminación</a></li>
+        <li><a href="#modificaciones">Modificaciones</a></li>
+        <li><a href="#ley">Ley aplicable y jurisdicción</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ol>
+    </div>
+
+    <h2 id="aceptacion">1. Aceptación de los términos</h2>
+    <p>Al acceder, registrarte o utilizar los servicios de Univers, aceptás estar sujeto a estos Términos y Condiciones. Si no estás de acuerdo con alguno de estos términos, no deberías usar el servicio.</p>
+    <p>Estos Términos constituyen un acuerdo legal vinculante entre vos y Univers. Si estás aceptando estos términos en nombre de una empresa, declarás que tenés la autoridad para hacerlo.</p>
+
+    <h2 id="servicio">2. Descripción del servicio</h2>
+    <p>Univers es un ecosistema de agentes de inteligencia artificial diseñados para automatizar y escalar procesos de ventas y atención al cliente a través de múltiples canales: WhatsApp, Instagram, Facebook y Telegram.</p>
+    <p>El servicio incluye:</p>
+    <ul>
+      <li>Agentes de IA configurados según tu base de conocimientos y catálogos.</li>
+      <li>Integración con APIs de plataformas de mensajería.</li>
+      <li>Panel de control para monitorear conversaciones y métricas.</li>
+      <li>Optimización continua del rendimiento de los agentes.</li>
+    </ul>
+    <p>Univers <strong>NO</strong> incluye:</p>
+    <ul>
+      <li>Asesoría legal, médica, financiera o de cualquier otra naturaleza profesional regulada.</li>
+      <li>Garantía de resultados comerciales o de ventas específicas.</li>
+      <li>Soporte para canales distintos a los mencionados sin acuerdo previo.</li>
+    </ul>
+
+    <h2 id="cuenta">3. Registro y cuenta</h2>
+    <p>Para acceder a ciertas funcionalidades del servicio, necesitás crear una cuenta. Al hacerlo, te comprometés a:</p>
+    <ul>
+      <li>Proporcionar información veraz, exacta y actualizada.</li>
+      <li>Mantener la seguridad de tus credenciales.</li>
+      <li>Notificarnos inmediatamente ante cualquier uso no autorizado de tu cuenta.</li>
+      <li>Asumir responsabilidad por todas las actividades que ocurran bajo tu cuenta.</li>
+    </ul>
+
+    <h2 id="uso">4. Uso aceptable</h2>
+    <p>Al usar Univers, aceptás NO utilizar el servicio para:</p>
+    <ul>
+      <li>Enviar spam, contenido fraudulento, engañoso o ilegal.</li>
+      <li>Suplantar la identidad de terceros o de Univers.</li>
+      <li>Distribuir malware, virus o cualquier código malicioso.</li>
+      <li>Realizar ingeniería inversa, descompilar o intentar extraer el código fuente.</li>
+      <li>Generar contenido que incite violencia, odio o discriminación.</li>
+      <li>Recopilar datos de otros usuarios sin su consentimiento.</li>
+      <li>Usar el servicio para actividades que violen leyes aplicables.</li>
+    </ul>
+    <p>El incumplimiento puede resultar en la suspensión inmediata de tu cuenta.</p>
+
+    <h2 id="planes">5. Planes y pagos</h2>
+    <p>Univers ofrece distintos planes según tus necesidades:</p>
+
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Precio</th>
+          <th>Incluye</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Básico</strong></td>
+          <td>US$ 299/mes</td>
+          <td>1 agente multicanal, 1.000 conversaciones/mes, integración WhatsApp e Instagram.</td>
+        </tr>
+        <tr>
+          <td><strong>Profesional</strong></td>
+          <td>US$ 599/mes</td>
+          <td>3 agentes especializados, 5.000 conversaciones/mes, CRM y calendarios, RAG avanzado.</td>
+        </tr>
+        <tr>
+          <td><strong>Enterprise</strong></td>
+          <td>A medida</td>
+          <td>Agentes ilimitados, infraestructura dedicada, SLA.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Facturación</strong>: los cargos se realizan por adelantado, mensualmente o según el ciclo acordado. <strong>Reembolsos</strong>: si cancelás dentro de los 14 días posteriores a la compra inicial, te devolvemos el 100% del cargo. Pasado ese período, no se realizan reembolsos proporcionales, pero mantenés acceso hasta el final del período pagado. <strong>Cambios de precio</strong>: te avisaremos con 30 días de anticipación cualquier cambio tarifario.</p>
+
+    <h2 id="pi">6. Propiedad intelectual</h2>
+    <p>El servicio, incluyendo su diseño, código fuente, marcas, logos, contenido generado por la plataforma y todos los elementos visuales, es propiedad de Univers y está protegido por leyes de propiedad intelectual.</p>
+    <p>No podés copiar, reproducir, distribuir, modificar o crear obras derivadas sin autorización escrita previa, salvo para uso personal no comercial.</p>
+
+    <h2 id="contenido">7. Contenido del usuario</h2>
+    <p>Al subir o proporcionar contenido a través de Univers (textos, imágenes, bases de datos, documentos), nos otorgás una licencia mundial, no exclusiva y libre de regalías para usar, procesar y entrenar tus agentes con ese contenido, únicamente con el fin de prestarte el servicio.</p>
+    <p>Conservás todos los derechos sobre tu contenido. No utilizamos tu contenido para entrenar modelos de IA compartidos con otros clientes ni para fines distintos a los expresamente contratados.</p>
+
+    <h2 id="limitacion">8. Limitación de responsabilidad</h2>
+    <p>En la máxima extensión permitida por la ley aplicable, Univers <strong>NO será responsable</strong> por:</p>
+    <ul>
+      <li>Daños indirectos, incidentales, especiales, consecuentes o punitivos.</li>
+      <li>Pérdida de beneficios, ingresos, clientes u oportunidades comerciales.</li>
+      <li>Respuestas incorrectas, incompletas o inapropiadas generadas por los agentes de IA.</li>
+      <li>Interrupciones del servicio por mantenimiento, fuerza mayor o causas fuera de nuestro control razonable.</li>
+      <li>Acciones u omisiones de terceros (proveedores de IA, plataformas de mensajería, etc.).</li>
+    </ul>
+    <p>Nuestra responsabilidad total aggregate por cualquier reclamo no excederá el monto total pagado por vos en los 12 meses anteriores al evento que dio lugar al reclamo.</p>
+
+    <h2 id="suspension">9. Suspensión y terminación</h2>
+    <p>Podés cancelar tu suscripción en cualquier momento desde el panel de control. Conservamos los datos 90 días después de la cancelación para permitir reactivación.</p>
+    <p>Univers puede suspender o terminar tu cuenta si:</p>
+    <ul>
+      <li>Incumplís estos Términos.</li>
+      <li>Tenés un pago pendiente por más de 30 días.</li>
+      <li>Tu uso del servicio pone en riesgo la seguridad o estabilidad de la plataforma.</li>
+      <li>Lo requiere una autoridad legal.</li>
+    </ul>
+    <p>En caso de terminación por incumplimiento, no habrá reembolso de los montos ya pagados.</p>
+
+    <h2 id="modificaciones">10. Modificaciones</h2>
+    <p>Podremos modificar estos Términos en cualquier momento. Te avisaremos con al menos 30 días de anticipación mediante email o aviso visible en el servicio. El uso continuado del servicio después de la entrada en vigor de los cambios constituye aceptación de los nuevos términos.</p>
+
+    <h2 id="ley">11. Ley aplicable y jurisdicción</h2>
+    <p>Estos Términos se rigen por las leyes del país donde Univers tiene su sede legal, sin renunciar a los derechos del consumidor que te correspondan por tu lugar de residencia. Para cualquier disputa, las partes se someten a los tribunales competentes de dicha jurisdicción.</p>
+
+    <h2 id="contacto">12. Contacto</h2>
+    <p>Si tenés preguntas sobre estos Términos, contactanos:</p>
+    <ul>
+      <li><strong>Email</strong>: <a href="mailto:legal@univers.ai">legal@univers.ai</a></li>
+      <li><strong>Email general</strong>: <a href="mailto:hola@univers.ai">hola@univers.ai</a></li>
+      <li><strong>Sitio web</strong>: <a href="index.html">univers.ai</a></li>
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="terminos.html" style="color:#fff; font-weight:700;">Términos</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="seguridad.html">Seguridad</a>
+    </div>
+    <p class="copyright">© 2024 Univers. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

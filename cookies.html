@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Política de Cookies de Univers. Qué cookies usamos, para qué y cómo gestionarlas.">
+  <title>Política de Cookies — Univers</title>
+  <link rel="icon" type="image/png" href="sprites/Logo univers sin fondo.png">
+  <link rel="canonical" href="https://univers.ai/cookies">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #e1e2e7;
+      background-color: #6a4c93;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.20) 1.2px, transparent 1.2px),
+        linear-gradient(180deg, #1a1c5e 0%, #6a4c93 50%, #9b8ec4 100%);
+      background-size: 24px 24px, 100% 100%;
+      background-attachment: fixed, fixed;
+      font-family: 'Hanken Grotesk', sans-serif;
+      line-height: 1.6;
+    }
+    .font-headline { font-family: 'Sora', sans-serif; }
+    a { color: #c1c1ff; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #edb1ff; }
+    nav.glass {
+      background: rgba(25, 28, 31, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nav-back {
+      background: #5d5fef;
+      color: #faf7ff;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 0 20px rgba(93, 95, 239, 0.2);
+    }
+    .nav-back:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(93, 95, 239, 0.5); color: #faf7ff; }
+    .hero { padding: 80px 24px 40px; text-align: center; }
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(93, 95, 239, 0.2);
+      border: 1px solid rgba(93, 95, 239, 0.4);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: #c1c1ff;
+    }
+    .hero p.subtitle { font-size: 18px; color: rgba(255, 255, 255, 0.7); max-width: 640px; margin: 0 auto; }
+    .legal-card {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      background: #ffffff;
+      color: #111417;
+      border-radius: 40px;
+      padding: 60px clamp(24px, 5vw, 80px);
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.25);
+    }
+    .legal-card h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 40px 0 14px;
+      color: #111417;
+      scroll-margin-top: 100px;
+    }
+    .legal-card h2:first-of-type { margin-top: 0; }
+    .legal-card p { margin: 0 0 14px; color: #4b5563; font-size: 16px; }
+    .legal-card ul { margin: 0 0 14px; padding-left: 22px; color: #4b5563; }
+    .legal-card li { margin-bottom: 8px; }
+    .legal-card strong { color: #111417; }
+    .legal-card a { color: #5d5fef; font-weight: 600; }
+    .updated { display: inline-block; padding: 6px 14px; background: #f3f4f6; color: #6b7280; border-radius: 9999px; font-size: 13px; font-weight: 600; margin-bottom: 30px; }
+    .toc { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px 24px; margin-bottom: 32px; }
+    .toc-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 12px; }
+    .toc ol { list-style: none; padding: 0; margin: 0; counter-reset: toc; }
+    .toc li { counter-increment: toc; padding: 4px 0; }
+    .toc li::before { content: counter(toc, decimal-leading-zero) ". "; color: #9ca3af; font-weight: 600; margin-right: 8px; }
+    .toc a { color: #111417; font-weight: 500; }
+    .toc a:hover { color: #5d5fef; }
+    .cookie-type {
+      background: #f9fafb;
+      border-left: 4px solid #5d5fef;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 0 0 16px;
+    }
+    .cookie-type h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: #111417;
+    }
+    .cookie-type p { margin: 0; color: #4b5563; font-size: 15px; }
+    .cookie-type .example {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    footer.site-footer { background: rgba(25, 28, 31, 0.6); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 24px; text-align: center; }
+    footer .footer-links { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-bottom: 16px; font-size: 14px; }
+    footer .footer-links a { color: rgba(255, 255, 255, 0.7); font-weight: 500; }
+    footer .footer-links a:hover { color: #fff; }
+    footer .copyright { color: rgba(255, 255, 255, 0.4); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <nav class="glass fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="sprites/Logo univers sin fondo.png" alt="Univers" class="h-10 w-auto">
+      <span class="font-headline text-white text-xl tracking-[0.25em] uppercase font-extralight">Univers</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <span class="material-symbols-outlined text-base">arrow_back</span>
+      Volver al sitio
+    </a>
+  </nav>
+
+  <section class="hero">
+    <span class="badge">Legal</span>
+    <h1>Política de Cookies</h1>
+    <p class="subtitle">Qué cookies usamos, por qué las necesitamos y cómo podés gestionarlas.</p>
+  </section>
+
+  <main class="legal-card">
+    <span class="updated">Última actualización: Enero 2026</span>
+
+    <div class="toc">
+      <p class="toc-title">Contenido</p>
+      <ol>
+        <li><a href="#que-son">¿Qué son las cookies?</a></li>
+        <li><a href="#tipos">Tipos de cookies que usamos</a></li>
+        <li><a href="#terceros">Cookies de terceros</a></li>
+        <li><a href="#gestion">Cómo gestionar las cookies</a></li>
+        <li><a href="#cambios">Cambios a esta política</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ol>
+    </div>
+
+    <h2 id="que-son">1. ¿Qué son las cookies?</h2>
+    <p>Las cookies son pequeños archivos de texto que un sitio web almacena en tu dispositivo cuando lo visitás. Sirven para que el sitio pueda recordar tus acciones y preferencias durante un período determinado.</p>
+    <p>También usamos tecnologías similares como <strong>pixels</strong>, <strong>localStorage</strong> y <strong>sessionStorage</strong>, que se rigen por esta misma política.</p>
+
+    <h2 id="tipos">2. Tipos de cookies que usamos</h2>
+
+    <div class="cookie-type">
+      <h3>🟢 Cookies estrictamente necesarias</h3>
+      <p>Imprescindibles para que el sitio funcione. Permiten la navegación, el acceso a áreas seguras y la conservación de tu sesión.</p>
+      <span class="example">Duración: sesión</span>
+    </div>
+
+    <div class="cookie-type">
+      <h3>📊 Cookies de rendimiento y analytics</h3>
+      <p>Nos permiten medir cuántas personas visitan el sitio y cómo navegan, para mejorar la experiencia. Toda la información es agregada y anónima.</p>
+      <span class="example">Ejemplo: Google Analytics</span>
+    </div>
+
+    <div class="cookie-type">
+      <h3>🎯 Cookies de funcionalidad</h3>
+      <p>Recuerdan tus preferencias (idioma, región, etc.) para ofrecerte una experiencia personalizada.</p>
+      <span class="example">Duración: hasta 1 año</span>
+    </div>
+
+    <div class="cookie-type">
+      <h3>📣 Cookies de marketing</h3>
+      <p>Se utilizan para mostrarte anuncios relevantes sobre Univers en otros sitios web y medir la eficacia de nuestras campañas.</p>
+      <span class="example">Ejemplo: Meta Pixel, Google Ads</span>
+    </div>
+
+    <h2 id="terceros">3. Cookies de terceros</h2>
+    <p>Algunos servicios de terceros que usamos pueden instalar sus propias cookies. Estos incluyen:</p>
+    <ul>
+      <li><strong>Google Analytics</strong>: análisis de tráfico y comportamiento en el sitio.</li>
+      <li><strong>Meta (Facebook / Instagram)</strong>: pixel de conversión para nuestras campañas publicitarias.</li>
+      <li><strong>LinkedIn Insight Tag</strong>: análisis de campañas B2B.</li>
+      <li><strong>HubSpot / CRM</strong>: seguimiento de leads y formularios.</li>
+      <li><strong>Stripe / pasarelas de pago</strong>: prevención de fraude y procesamiento de pagos.</li>
+    </ul>
+    <p>Estos proveedores tienen sus propias políticas de privacidad y cookies. Te recomendamos revisarlas.</p>
+
+    <h2 id="gestion">4. Cómo gestionar las cookies</h2>
+    <p>Podés controlar y gestionar las cookies de varias formas:</p>
+
+    <h3 style="font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: #111417;">🍪 Panel de preferencias de Univers</h3>
+    <p>Cuando visitás nuestro sitio por primera vez, aparece un banner donde podés aceptar o rechazar las cookies no esenciales. Podés cambiar tus preferencias en cualquier momento desde el pie de página.</p>
+
+    <h3 style="font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: #111417;">⚙️ Configuración del navegador</h3>
+    <p>La mayoría de los navegadores te permiten:</p>
+    <ul>
+      <li>Ver qué cookies están instaladas y eliminarlas una por una.</li>
+      <li>Bloquear cookies de terceros.</li>
+      <li>Bloquear todas las cookies de sitios específicos.</li>
+      <li>Borrar todas las cookies al cerrar el navegador.</li>
+    </ul>
+    <p>Encontrás estas opciones en la sección "Privacidad" o "Seguridad" de tu navegador:</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/cookies-informacion-que-los-sitios-web-guardan-en-" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/ibrw2147/mac" target="_blank" rel="noopener">Safari</a></li>
+      <li><a href="https://support.microsoft.com/es-es/microsoft-edge/delete-cookies-in-microsoft-edge" target="_blank" rel="noopener">Microsoft Edge</a></li>
+    </ul>
+
+    <h3 style="font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: #111417;">⚠️ Tené en cuenta</h3>
+    <p>Si bloqueás todas las cookies, es posible que algunas partes del sitio no funcionen correctamente. Las cookies estrictamente necesarias no se pueden desactivar porque son esenciales para el funcionamiento del servicio.</p>
+
+    <h2 id="cambios">5. Cambios a esta política</h2>
+    <p>Podemos actualizar esta política para reflejar cambios en las cookies que usamos o por motivos legales. Te avisaremos mediante un aviso visible en el sitio. La fecha de la última actualización se indica al inicio de esta página.</p>
+
+    <h2 id="contacto">6. Contacto</h2>
+    <p>Si tenés preguntas sobre nuestra política de cookies:</p>
+    <ul>
+      <li><strong>Email</strong>: <a href="mailto:privacidad@univers.ai">privacidad@univers.ai</a></li>
+      <li><strong>Sitio web</strong>: <a href="index.html">univers.ai</a></li>
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="terminos.html">Términos</a>
+      <a href="cookies.html" style="color:#fff; font-weight:700;">Cookies</a>
+      <a href="seguridad.html">Seguridad</a>
+    </div>
+    <p class="copyright">© 2024 Univers. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
