@@ -5,6 +5,9 @@ carpeta de limpieza/
 .atl/
 *.artifact.json
 
+# v1 prototype (superseded by index.html, kept locally for reference)
+univers-landing-v2.html
+
 # OS
 .DS_Store
 Thumbs.db
