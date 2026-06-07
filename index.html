@@ -241,9 +241,19 @@
     }
     .hero-glow { animation: heroGlow 4s ease-in-out infinite; }
     .reveal { opacity: 0; }
+    .reveal-up,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale,
+    .reveal-fade { opacity: 0; }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+    .reveal-delay-7 { transition-delay: 0.7s; }
+    .reveal-delay-8 { transition-delay: 0.8s; }
     .counter-value { display: inline-block; }
     .sprite-wrap {
       position: relative;
@@ -535,7 +545,7 @@
 
     <!-- 💥 CAOS Section -->
     <div class="p-8 sm:p-12 lg:p-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-1 reveal" data-scroll-reveal="">
+      <div class="order-1 reveal">
         <span class="inline-block px-4 py-1.5 bg-error/10 text-error-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-error/20">Para negocios en crecimiento</span>
         <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">Tu negocio está colapsando sin IA</h2>
         <div class="p-6 sm:p-8 bg-surface-container-low rounded-3xl border border-outline/10">
@@ -570,7 +580,7 @@
           <video src="sprites/movimiento_de_checks_verdes_202605251318.mp4" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover rounded-[2.5rem]"></video>
         </div>
       </div>
-      <div class="order-1 lg:order-2 reveal reveal-delay-1" data-scroll-reveal="">
+      <div class="order-1 lg:order-2 reveal reveal-delay-1">
         <span class="inline-block px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-green-500/20">Mensajes contestados, citas agendadas, mente tranquila.</span>
         <h2 class="text-4xl md:text-6xl lg:text-7xl font-headline font-black mb-8 leading-[0.95] uppercase">0 mensajes sin responder. 100% confiable.</h2>
         <div class="p-6 sm:p-8 bg-primary-container/5 rounded-3xl border border-primary-container/10 mb-8">
@@ -593,13 +603,13 @@
         </div>
         <canvas id="peeking-sprite" class="w-full h-full"></canvas>
       </div>
-      <div class="text-center mb-16 reveal" data-scroll-reveal="">
+      <div class="text-center mb-16 reveal">
         <span class="inline-block px-4 py-1.5 bg-primary-container/10 text-primary-container text-xs font-bold rounded-full mb-6 uppercase tracking-widest border border-primary-container/20">Nuestro Expertise</span>
         <h2 class="font-headline font-black text-4xl lg:text-5xl uppercase">Todo lo que necesitas para escalar sin contratar más personal</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="services-grid">
         <!-- Service 1 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">support_agent</span>
           </div>
@@ -608,7 +618,7 @@
           <p class="text-sm text-white/90 leading-relaxed">Soporte en WhatsApp, Instagram, Facebook y Telegram que resuelve dudas, filtra leads y deriva a humanos solo cuando es estrictamente necesario.</p>
         </div>
         <!-- Service 2 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-2" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">event_available</span>
           </div>
@@ -617,7 +627,7 @@
           <p class="text-sm leading-relaxed text-white/90">Sincronización total para agendar, reprogramar y enviar recordatorios de reuniones sin que tú muevas un dedo.</p>
         </div>
         <!-- Service 3 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-3" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined !text-4xl">settings_suggest</span>
           </div>
@@ -626,7 +636,7 @@
           <p class="text-sm text-white/90 leading-relaxed">Diseñamos flujos de trabajo que conectan tus herramientas actuales (CRM, hojas de cálculo) con el poder de la IA.</p>
         </div>
         <!-- Service 4 -->
-        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" data-scroll-reveal="" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
+        <div class="service-card p-8 rounded-4xl border border-outline/10 hover:border-primary-container hover:shadow-2xl hover:shadow-primary-container/20 transition-all duration-300 group flex flex-col items-center text-center reveal reveal-delay-1" style="background-color: rgb(93, 95, 239); border-color: rgba(255, 255, 255, 0.2);">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white/20 text-white">
             <span class="material-symbols-outlined !text-4xl">psychology</span>
           </div>
@@ -638,7 +648,7 @@
     </div>
 
     <div class="bg-slate-50 py-4 border-y border-outline/10 overflow-hidden">
-      <div class="text-center mb-16 reveal" data-scroll-reveal="">
+      <div class="text-center mb-16 reveal">
         <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Se conecta con las herramientas que ya usás</h3>
       </div>
       <div class="flex gap-16 lg:gap-24 items-center" style="animation: marquee 20s linear infinite;">
@@ -669,22 +679,22 @@
 
     <div class="bg-white p-8 sm:p-12 lg:p-24">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal="">
+        <div class="relative text-center lg:text-left reveal reveal-delay-1">
           <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">01</div>
           <h4 class="font-bold mb-2 text-background">Auditoría de Flujo</h4>
           <p class="text-sm text-background/60">Mapeamos el "ADN" de tu marca y tus conversaciones actuales para identificar cuellos de botella.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-2" data-scroll-reveal="">
+        <div class="relative text-center lg:text-left reveal reveal-delay-2">
           <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">02</div>
           <h4 class="font-bold mb-2 text-background">Entrenamiento con Tus Datos</h4>
           <p class="text-sm text-background/60">Alimentamos al agente con tu base de conocimientos, precios y catálogos. Nada genérico.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-3" data-scroll-reveal="">
+        <div class="relative text-center lg:text-left reveal reveal-delay-3">
           <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">03</div>
           <h4 class="font-bold mb-2 text-background">Despliegue Multicanal</h4>
           <p class="text-sm text-background/60">Conectamos la IA a tu WhatsApp, redes y web en días, no en meses.</p>
         </div>
-        <div class="relative text-center lg:text-left reveal reveal-delay-1" data-scroll-reveal="">
+        <div class="relative text-center lg:text-left reveal reveal-delay-1">
           <div class="text-5xl lg:text-6xl font-headline font-black text-black/20 mb-4" style="color: rgb(0, 0, 0);">04</div>
           <h4 class="font-bold mb-2 text-background">Optimización Continua</h4>
           <p class="text-sm text-background/60">Monitoreamos las conversaciones para refinar el tono y aumentar tu tasa de conversión mes a mes.</p>
@@ -693,10 +703,10 @@
     </div>
 
     <!-- BEGIN: Editorial Section -->
-    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal" data-scroll-reveal="">
+    <div class="p-8 sm:p-12 lg:p-24 bg-white text-background reveal">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <div class="order-2 lg:order-1">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1" data-scroll-reveal="">No es un bot que programás. Es un compañero que entrenás.</h2>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1">No es un bot que programás. Es un compañero que entrenás.</h2>
           <div class="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-xl">
             <p class="">En la era de la IA, la ventaja competitiva no es tener la tecnología, sino saber integrarla a tu cultura. Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y, gracias a nuestra arquitectura robusta (RAG + SQL), garantiza que cada respuesta sea precisa y segura.</p>
           </div>
@@ -721,10 +731,10 @@
 
     <!-- 💰 Packages -->
     <div class="p-8 sm:p-12 lg:p-24 bg-white" id="precios">
-      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal" data-scroll-reveal="">Inversión en Crecimiento</h2>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 lg:mb-20 uppercase reveal">Inversión en Crecimiento</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Básico -->
-        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1" data-scroll-reveal="">
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col reveal reveal-delay-1">
           <h3 class="font-headline font-bold text-2xl mb-2">Básico</h3>
           <p class="text-on-surface-variant mb-8">Para emprendedores y PyMEs en crecimiento.</p>
           <div class="text-4xl font-headline font-black mb-10">$299<span class="text-sm font-medium text-on-surface-variant">/mes</span></div>
@@ -737,7 +747,7 @@
           <a class="block text-center border-2 border-background px-6 py-3 rounded-full font-bold hover:bg-background hover:text-white transition-all" href="#">Elegir Plan Básico</a>
         </div>
         <!-- Profesional -->
-        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2" data-scroll-reveal="">
+        <div class="p-8 lg:p-10 rounded-4xl border-2 border-primary-container relative bg-primary-container/5 flex flex-col scale-105 shadow-xl z-10 reveal reveal-delay-2">
           <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Más elegido</div>
           <h3 class="font-headline font-bold text-2xl mb-2">Profesional</h3>
           <p class="text-on-surface-variant mb-8">Para equipos de ventas activos que necesitan escalar.</p>
@@ -752,7 +762,7 @@
           <a class="block text-center bg-primary-container text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition-all shadow-lg cta-glow" href="#">Elegir Plan Profesional</a>
         </div>
         <!-- Enterprise -->
-        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3" data-scroll-reveal="">
+        <div class="p-8 lg:p-10 rounded-4xl border border-outline/10 hover:border-primary-container transition-colors flex flex-col md:col-span-2 lg:col-span-1 reveal reveal-delay-3">
           <h3 class="font-headline font-bold text-2xl mb-2">Enterprise</h3>
           <p class="text-on-surface-variant mb-8">Para operaciones que requieren escala masiva y seguridad dedicada.</p>
           <div class="text-4xl font-headline font-black mb-10">A Medida</div>
@@ -768,7 +778,7 @@
     </div>
 
     <!-- 🛡️ Social Proof -->
-    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos" data-scroll-reveal="">
+    <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos">
       <div class="flex flex-col gap-2 text-center md:text-left">
         <p class="text-3xl lg:text-4xl font-headline font-black">+120h/mes<span class="text-lg font-medium text-white/60"> ahorradas en tareas administrativas</span></p>
         <p class="text-white/60 uppercase tracking-widest text-xs font-bold">Por cada agente implementado</p>
@@ -794,7 +804,7 @@
         <canvas id="pensativo-sprite" class="w-full h-full"></canvas>
         <span id="pensativo-q" style="position:absolute;top:-16px;right:-12px;font-size:36px;font-weight:900;color:#fff;background:linear-gradient(135deg,#5d5fef,#edb1ff);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:none;pointer-events:none;box-shadow:0 4px 20px rgba(93,95,239,0.5);line-height:1;">?</span>
       </div>
-      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal" data-scroll-reveal="">Resolvemos tus dudas</h2>
+      <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal">Resolvemos tus dudas</h2>
       <div class="max-w-3xl mx-auto space-y-4">
         <details class="group border border-outline/10 rounded-2xl overflow-hidden" open="">
           <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
@@ -1222,78 +1232,93 @@
   // GSAP defaults (only if GSAP loaded)
   if (typeof gsap !== 'undefined') gsap.defaults({ ease: 'power2.out' });
 
-  // Scroll reveal — GSAP ScrollTrigger + fallback
-  (function() {
-    var hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
-
-    // Reduced motion — show everything
+  // Scroll reveal — IntersectionObserver (portado del prototipo, robusto)
+  // Soporta .reveal-up / -left / -right / -scale / -fade y reveal-delay-1..8
+  (function scrollReveal() {
+    // Reduced motion — show everything immediately
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.reveal').forEach(function(el) { el.style.opacity = '1'; });
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = '';
+      });
       return;
     }
 
-    if (hasGSAP) {
-      // Animate each .reveal section with GSAP
+    // Set initial state for all .reveal elements
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.style.transition = 'opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      if (el.classList.contains('reveal-left')) {
+        el.style.transform = 'translateX(-40px)';
+      } else if (el.classList.contains('reveal-right')) {
+        el.style.transform = 'translateX(40px)';
+      } else if (el.classList.contains('reveal-scale')) {
+        el.style.transform = 'scale(0.92)';
+      } else if (!el.classList.contains('reveal-fade')) {
+        el.style.transform = 'translateY(50px)';
+      }
+      el.style.opacity = '0';
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      // Old browser fallback — show everything
       document.querySelectorAll('.reveal').forEach(function(el) {
-        gsap.from(el, {
-          y: 40, opacity: 0, duration: 0.8,
-          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none', once: true }
-        });
+        el.style.opacity = '1';
+        el.style.transform = '';
       });
+      return;
+    }
 
-      // Animated counters with GSAP
-      document.querySelectorAll('.counter-value').forEach(function(el) {
-        var text = el.textContent;
-        var isPercentage = text.includes('%');
-        var hasPrefix = text.startsWith('+');
-        var suffix = text.replace(/^[^0-9]*/, '').replace(/[0-9]/g, '');
-        var target = parseInt(text.replace(/[^0-9]/g, '')) || 0;
+    // Stagger delay map (matches .reveal-delay-N classes)
+    var DELAYS = { 'reveal-delay-1': 100, 'reveal-delay-2': 200, 'reveal-delay-3': 300,
+                    'reveal-delay-4': 400, 'reveal-delay-5': 500, 'reveal-delay-6': 600,
+                    'reveal-delay-7': 700, 'reveal-delay-8': 800 };
 
-        ScrollTrigger.create({
-          trigger: el, start: 'top 90%', once: true,
-          onEnter: function() {
-            gsap.to({ val: 0 }, {
-              val: target, duration: 1.5, ease: 'power2.out',
-              onUpdate: function() {
-                var cur = Math.floor(this.targets()[0].val);
-                el.textContent = (hasPrefix ? '+' : '') + cur + (isPercentage ? '%' : suffix);
-              },
-              onComplete: function() {
-                el.textContent = (hasPrefix ? '+' : '') + target + (isPercentage ? '%' : suffix);
-              }
-            });
-          }
-        });
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var delay = 0;
+          Object.keys(DELAYS).forEach(function(cls) {
+            if (el.classList.contains(cls)) delay = DELAYS[cls];
+          });
+          setTimeout(function() {
+            el.style.opacity = '1';
+            el.style.transform = '';
+          }, delay);
+          observer.unobserve(el);
+        }
       });
-    } else {
-      // Fallback: IntersectionObserver + CSS transitions
-      document.querySelectorAll('.reveal').forEach(function(el) {
-        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        el.style.transform = 'translateY(40px)';
-      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              // Stagger según clase de delay
-              var d = 0;
-              if (entry.target.classList.contains('reveal-delay-1')) d = 120;
-              else if (entry.target.classList.contains('reveal-delay-2')) d = 240;
-              else if (entry.target.classList.contains('reveal-delay-3')) d = 360;
-              setTimeout(function() {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = '';
-              }, d);
-              observer.unobserve(entry.target);
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+  })();
+
+  // Animated counters with GSAP (mantener — funciona bien)
+  (function() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    document.querySelectorAll('.counter-value').forEach(function(el) {
+      var text = el.textContent;
+      var isPercentage = text.includes('%');
+      var hasPrefix = text.startsWith('+');
+      var suffix = text.replace(/^[^0-9]*/, '').replace(/[0-9]/g, '');
+      var target = parseInt(text.replace(/[^0-9]/g, '')) || 0;
+
+      ScrollTrigger.create({
+        trigger: el, start: 'top 90%', once: true,
+        onEnter: function() {
+          gsap.to({ val: 0 }, {
+            val: target, duration: 1.5, ease: 'power2.out',
+            onUpdate: function() {
+              var cur = Math.floor(this.targets()[0].val);
+              el.textContent = (hasPrefix ? '+' : '') + cur + (isPercentage ? '%' : suffix);
+            },
+            onComplete: function() {
+              el.textContent = (hasPrefix ? '+' : '') + target + (isPercentage ? '%' : suffix);
             }
           });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-      } else {
-        document.querySelectorAll('.reveal').forEach(function(el) { el.style.opacity = '1'; el.style.transform = ''; });
-      }
-    }
+        }
+      });
+    });
   })();
 
   // Hero parallax — GSAP ScrollTrigger + fallback
