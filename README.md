@@ -90,7 +90,7 @@ Las 4 páginas (`privacidad.html`, `terminos.html`, `cookies.html`, `seguridad.h
 
 ## Contacto
 
-- **General**: hola@univers.ai
+- **General**: Equipounivers@gmail.com
 - **Privacidad**: privacidad@univers.ai
 - **Seguridad**: security@univers.ai
 - **Legal**: legal@univers.ai

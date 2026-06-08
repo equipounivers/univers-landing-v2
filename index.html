@@ -11,7 +11,6 @@
   <meta name="twitter:image" content="sprites/Logo univers sin fondo.png">
   <meta name="description" content="Univers es un ecosistema de agentes de IA diseñados para escalar tu equipo de ventas sin límites. Automatización omnicanal 24/7 para WhatsApp, Instagram y Facebook.">
   <link rel="canonical" href="https://univers.ai/">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
   <title>Univers - Agentes de IA para Ventas</title>
   <script type="application/ld+json">
   {
@@ -126,11 +125,15 @@
       line-height: 0.85;
     }
     .type-cursor { display: inline-block; width: 2px; height: 1em; background: white; margin-left: 2px; vertical-align: middle; animation: blink 0.8s step-end infinite; }
-    .blur-word { display: inline; filter: blur(20px); opacity: 0; }
-    .blur-word.animated { animation: blurReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    @keyframes blurReveal {
-      0% { filter: blur(20px); opacity: 0; transform: translateY(20px); }
-      100% { filter: blur(0); opacity: 1; transform: translateY(0); }
+    .blur-word {
+      display: inline-block;
+      clip-path: inset(0 100% 0 0);
+      opacity: 1;
+    }
+    .blur-word.animated { animation: revealMask 1s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+    @keyframes revealMask {
+      0% { clip-path: inset(0 100% 0 0); }
+      100% { clip-path: inset(0 0 0 0); }
     }
     @keyframes blink { 50% { opacity: 0; } }
     .dot-grid {
@@ -254,6 +257,16 @@
     .reveal-delay-6 { transition-delay: 0.6s; }
     .reveal-delay-7 { transition-delay: 0.7s; }
     .reveal-delay-8 { transition-delay: 0.8s; }
+    /* Nav stagger — elementos caen suavemente uno por uno después del brand reveal */
+    .nav-stagger-item {
+      opacity: 0;
+      transform: translateY(-25px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .nav-stagger-item.nav-stagger-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .counter-value { display: inline-block; }
     .sprite-wrap {
       position: relative;
@@ -435,20 +448,20 @@
         <!-- REPLACE: Tu isotype real -->
         <img src="sprites/logo-sin-fondo y sin letras.png" alt="Univers Isotype" class="h-12 w-auto" onerror="this.style.display='none';document.getElementById('nav-logo-fallback')?.classList.add('active');" style="border-radius: 8px;">
         <div class="logo-fallback nav-fallback" id="nav-logo-fallback">U</div>
-        <div class="logo-text-wrapper">
+        <div class="logo-text-wrapper nav-stagger-item">
           <div class="w-px bg-white/20 h-6"></div>
           <span class="font-headline text-white text-xl tracking-[0.25em] uppercase font-extralight">Univers</span>
         </div>
       </div>
     </div>
     <div class="hidden lg:flex items-center gap-8 text-sm font-bold uppercase tracking-wider text-white/80">
-      <a class="hover:text-primary transition-colors" href="#agentes">Productos</a>
-      <a class="hover:text-primary transition-colors" href="#precios">Precios</a>
-      <a class="hover:text-primary transition-colors" href="#casos">Preguntas</a>
+      <a class="hover:text-primary transition-colors nav-stagger-item" href="#agentes">Productos</a>
+      <a class="hover:text-primary transition-colors nav-stagger-item" href="#precios">Precios</a>
+      <a class="hover:text-primary transition-colors nav-stagger-item" href="#casos">Preguntas</a>
     </div>
     <div class="flex items-center gap-6 h-full items-stretch">
       <div class="flex items-center gap-4"></div>
-        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow demo-trigger" href="javascript:void(0)" data-cta="primary">Agendar Demo</a>
+        <a class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-primary-container/20 cta-glow nav-stagger-item" href="https://t.me/UniversPortalbot" data-cta="primary">Agendar Demo</a>
         <button class="hamburger-btn flex lg:hidden" id="hamburger-btn" aria-label="Abrir menú" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
@@ -482,7 +495,7 @@
       <a class="hover:text-primary transition-colors flex items-center" href="#casos">Preguntas</a>
     </div>
     <div class="flex items-center gap-3 h-full items-stretch">
-      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center demo-trigger" href="javascript:void(0)" data-cta="primary">Agendar Demo</a>
+      <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-xs hover:brightness-110 transition-all h-8 flex items-center" href="https://t.me/UniversPortalbot" data-cta="primary">Agendar Demo</a>
     </div>
   </div>
 </div>
@@ -500,19 +513,19 @@
   <span class="blur-word">PERDER TUS VENTAS</span>
 </h1>
         <div class="mt-8 lg:mt-16 max-w-xl mx-auto lg:mx-0">
-          <p class="text-xl lg:text-2xl text-white/90 leading-relaxed font-medium">
+          <p class="text-xl lg:text-2xl text-white/90 leading-relaxed font-medium reveal reveal-up" style="opacity: 0;">
             Conectamos WhatsApp, Instagram, Facebook y Telegram con un agente de IA entrenado exclusivamente con tus datos. Responde, agenda y vende en segundos, con la precisión de un sistema robusto y la empatía de tu mejor empleado.
           </p>
           <div class="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
-            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm" href="#agentes" data-cta="secondary">Ver cómo funciona</a>
-            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40 cta-glow demo-trigger" href="javascript:void(0)" data-cta="primary">Agendar mi Demo Gratuita</a>
+            <a class="border-2 border-white/30 text-white px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/10 transition-all backdrop-blur-sm reveal reveal-up" style="opacity: 0;" href="https://t.me/UniversPortalbot" data-cta="secondary">Agendar por Telegram</a>
+            <a class="bg-primary-container text-on-primary-container px-8 lg:px-10 py-4 rounded-full font-bold text-base lg:text-lg hover:scale-105 transition-all shadow-2xl shadow-primary-container/40 cta-glow reveal reveal-up" style="opacity: 0;" href="https://t.me/UniversPortalbot" data-cta="primary">Hablar con Univers</a>
           </div>
         </div>
       </div>
       <div class="w-full lg:w-[60%] flex items-center justify-center relative h-[750px] lg:h-[500px]">
         <!-- Astronaut sprite -->
         <div class="relative z-10 w-full h-full flex items-center justify-center translate-x-[0%] -translate-y-[200px] transition-all duration-700 hover:-translate-y-[230px] hover:scale-105 group">
-          <div class="sprite-container image-glow" id="sprite-wrapper">
+          <div class="sprite-container image-glow reveal" style="opacity: 0;" id="sprite-wrapper">
             <div class="loading-placeholder">
               <div>
                 <span class="material-symbols-outlined text-4xl mb-2 block">downloading</span>
@@ -533,8 +546,8 @@
 <!-- BEGIN: Transition Section -->
 <section class="min-h-[35vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-16 bg-transparent">
   <div class="max-w-4xl mx-auto animate-fade-up">
-    <p class="text-white/60 text-xl md:text-2xl font-medium mb-4">Cada minuto que tu equipo pasa respondiendo las mismas preguntas...</p>
-    <p class="text-white text-3xl md:text-5xl lg:text-6xl font-headline font-black uppercase tracking-tight">Estás <span class="text-red-500 animate-pulse" style="text-shadow: 0 0 20px rgba(239,68,68,0.6);">perdiendo</span> ventas y dejando clientes para la competencia.</p>
+    <p class="text-white/60 text-xl md:text-2xl font-medium mb-4 reveal reveal-up">Cada minuto que tu equipo pasa respondiendo las mismas preguntas...</p>
+    <p class="text-white text-3xl md:text-5xl lg:text-6xl font-headline font-black uppercase tracking-tight reveal reveal-up reveal-delay-1">Estás <span class="text-red-500 animate-pulse" style="text-shadow: 0 0 20px rgba(239,68,68,0.6);">perdiendo</span> ventas y dejando clientes para la competencia.</p>
   </div>
 </section>
 <!-- END: Transition Section -->
@@ -553,7 +566,7 @@
           <p class="text-on-surface-variant font-medium">de tus clientes abandonan el chat si no hay respuesta en 2 minutos.</p>
         </div>
       </div>
-      <div class="order-2 relative flex justify-center">
+      <div class="order-2 relative flex justify-center reveal reveal-up">
         <!-- REPLACE: Imagen smartphone con notificaciones -->
         <div class="overflow-hidden rounded-3xl lg:rounded-4xl shadow-xl aspect-[9/16] w-full max-w-[320px] bg-surface-container-low">
           <video src="sprites/sinveoDigital_notifications_explode_in…_202605281446 (online-video-cutter.com).mp4" autoplay="" loop="" muted="" playsinline="" class="w-full h-full object-cover"></video>
@@ -566,7 +579,7 @@
 
     <!-- ✨ PAZ Section -->
     <div class="p-8 sm:p-12 lg:p-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-2 lg:order-1 relative">
+      <div class="order-2 lg:order-1 relative reveal reveal-up">
         <!-- REPLACE: Imagen del robot/IA en paz -->
         <!-- Working Robot Sprite -->
         <div id="working-float" class="absolute left-1/2 -translate-x-1/2 bottom-0 w-48 h-48 z-20 pointer-events-none sprite-wrap">
@@ -587,7 +600,7 @@
           <p class="text-4xl font-headline font-black text-green-400 mb-2">Cero Alucinaciones</p>
           <p class="text-on-surface-variant font-medium">Gracias a nuestra tecnología RAG y base de datos SQL, el agente solo usa la información real de tu negocio.</p>
         </div>
-        <a class="inline-flex items-center gap-4 bg-primary-container text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center demo-trigger" href="javascript:void(0)" data-cta="primary">
+        <a class="inline-flex items-center gap-4 bg-primary-container text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center" href="https://t.me/UniversPortalbot" data-cta="primary">
           Quiero esta tranquilidad para mi negocio →
         </a>
       </div>
@@ -649,7 +662,7 @@
 
     <div class="bg-slate-50 py-4 border-y border-outline/10 overflow-hidden">
       <div class="text-center mb-16 reveal">
-        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Se conecta con las herramientas que ya usás</h3>
+        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-12">Se conecta con las herramientas que ya usas</h3>
       </div>
       <div class="flex gap-16 lg:gap-24 items-center" style="animation: marquee 20s linear infinite;">
         <img src="iconos/Chatwoot--Streamline-Simple-Icons.svg" alt="Chatwoot" class="h-10 w-auto object-contain flex-shrink-0" title="Chatwoot">
@@ -708,16 +721,16 @@
         <div class="order-2 lg:order-1">
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-8 lg:mb-10 leading-tight uppercase reveal reveal-delay-1">No es un bot que programás. Es un compañero que entrenás.</h2>
           <div class="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-xl">
-            <p class="">En la era de la IA, la ventaja competitiva no es tener la tecnología, sino saber integrarla a tu cultura. Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y, gracias a nuestra arquitectura robusta (RAG + SQL), garantiza que cada respuesta sea precisa y segura.</p>
+            <p class="reveal reveal-up reveal-delay-2">En la era de la IA, la ventaja competitiva no es tener la tecnología, sino saber integrarla a tu cultura. Univers no solo automatiza respuestas; aprende de tus mejores vendedores, replica tu tono de voz y, gracias a nuestra arquitectura robusta (RAG + SQL), garantiza que cada respuesta sea precisa y segura.</p>
           </div>
           <div class="mt-12">
-            <a class="inline-flex items-center gap-4 bg-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center demo-trigger" href="javascript:void(0)" data-cta="primary">
-              Ver cómo se entrena a tu agente →
+            <a class="inline-flex items-center gap-4 bg-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl w-full sm:w-auto justify-center reveal reveal-up reveal-delay-3" href="https://t.me/UniversPortalbot" data-cta="primary">
+              Conoce a tu agente Univers →
             </a>
           </div>
         </div>
         <div class="order-1 lg:order-2">
-          <div class="relative group">
+          <div class="relative group reveal reveal-scale reveal-delay-2">
             <div class="absolute inset-0 univers-gradient opacity-20 blur-2xl group-hover:opacity-30 transition-opacity"></div>
             <!-- REPLACE: Imagen editorial mockup -->
             <div class="overflow-hidden rounded-4xl lg:rounded-5xl shadow-3xl aspect-square bg-surface-container-low">
@@ -779,18 +792,18 @@
 
     <!-- 🛡️ Social Proof -->
     <div class="px-8 lg:px-24 py-16 bg-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-12 text-white reveal" id="casos">
-      <div class="flex flex-col gap-2 text-center md:text-left">
+      <div class="flex flex-col gap-2 text-center md:text-left reveal reveal-up">
         <p class="text-3xl lg:text-4xl font-headline font-black">+120h/mes<span class="text-lg font-medium text-white/60"> ahorradas en tareas administrativas</span></p>
         <p class="text-white/60 uppercase tracking-widest text-xs font-bold">Por cada agente implementado</p>
       </div>
-      <div class="flex items-center gap-8 lg:gap-12 opacity-50 flex-wrap justify-center">
+      <div class="flex items-center gap-8 lg:gap-12 opacity-50 flex-wrap justify-center reveal reveal-up reveal-delay-1">
         <span class="font-headline font-bold text-lg text-white/70">Chatwoot</span>
         <span class="font-headline font-bold text-lg text-white/70">N8N</span>
         <span class="font-headline font-bold text-lg text-white/70">Contabo</span>
         <span class="font-headline font-bold text-lg text-white/70">Baserow</span>
         <span class="font-headline font-bold text-lg text-white/70">Supabase</span>
       </div>
-      <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center demo-trigger" href="javascript:void(0)" data-cta="primary">Obtener Acceso a la Demo Beta</a>
+      <a class="bg-white text-background px-8 py-3 rounded-full font-bold hover:scale-105 transition-all w-full sm:w-auto text-center reveal reveal-up reveal-delay-2" href="https://t.me/UniversPortalbot" data-cta="primary">Habla con el bot para empezar</a>
     </div>
 
     <!-- ❓ FAQ -->
@@ -806,7 +819,7 @@
       </div>
       <h2 class="text-center font-headline font-black text-4xl lg:text-5xl mb-16 uppercase reveal">Resolvemos tus dudas</h2>
       <div class="max-w-3xl mx-auto space-y-4">
-        <details class="group border border-outline/10 rounded-2xl overflow-hidden" open="">
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden reveal reveal-up" open="">
           <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
             ¿Es difícil de configurar? ¿Necesito saber de programación?
             <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
@@ -815,7 +828,7 @@
             Para nada. Nuestro equipo se encarga de toda la implementación técnica. Vos solo nos compartís la información de tu negocio (PDFs, webs, manuales) y nosotros entrenamos y desplegamos el agente por vos.
           </div>
         </details>
-        <details class="group border border-outline/10 rounded-2xl overflow-hidden">
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden reveal reveal-up reveal-delay-1">
           <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
             ¿El agente suena como un robot o inventa cosas?
             <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
@@ -824,7 +837,7 @@
             Utilizamos modelos de lenguaje avanzados afinados con tu estilo de comunicación. Además, nuestra tecnología RAG (Retrieval-Augmented Generation) obliga al agente a responder solo con la información real de tu base de datos, eliminando las "alucinaciones" típicas de otras IAs.
           </div>
         </details>
-        <details class="group border border-outline/10 rounded-2xl overflow-hidden">
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden reveal reveal-up reveal-delay-2">
           <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
             ¿En qué canales puede atender mi negocio?
             <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
@@ -833,7 +846,7 @@
             Actualmente integramos WhatsApp, Instagram, Facebook y Telegram de forma nativa, unificando toda la atención en un solo cerebro digital.
           </div>
         </details>
-        <details class="group border border-outline/10 rounded-2xl overflow-hidden">
+        <details class="group border border-outline/10 rounded-2xl overflow-hidden reveal reveal-up reveal-delay-3">
           <summary class="flex justify-between items-center p-6 cursor-pointer font-bold bg-white group-open:bg-surface-container-low text-background group-open:text-white transition-colors">
             ¿Puedo probarlo antes de comprometerme?
             <span class="group-open:rotate-180 transition-transform text-background/60 group-open:text-white/60">↓</span>
@@ -963,10 +976,16 @@
     <!-- Bottom: copyright + contacto -->
     <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <p class="text-white/50 text-sm text-center md:text-left">© 2024 Univers. Todos los derechos reservados.</p>
-      <a href="mailto:hola@univers.ai" class="text-white/60 hover:text-primary text-sm transition-colors flex items-center gap-2">
-        <span class="material-symbols-outlined text-base">mail</span>
-        Equipounivers@gmail.com
-      </a>
+      <div class="flex items-center gap-4">
+        <a href="https://t.me/UniversPortalbot" class="text-white/60 hover:text-primary text-sm transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">send</span>
+          @UniversPortalbot
+        </a>
+        <a href="mailto:Equipounivers@gmail.com" class="text-white/60 hover:text-primary text-sm transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">mail</span>
+          Equipounivers@gmail.com
+        </a>
+      </div>
     </div>
   </div>
 </footer>
@@ -1031,6 +1050,36 @@
     setTimeout(function() {
       if (O.style.display !== 'none') hideReveal();
     }, 10000);
+  })();
+
+  // ═══════════════════════════════════════════════════════
+  // Nav stagger — elementos caen suavemente uno por uno
+  // después del brand reveal. El brand reveal dura ~5.1s
+  // (800ms delay + 1.5s logo + 3.2s pause + 0.8s FLIP + 0.6s fade).
+  // ═══════════════════════════════════════════════════════
+  (function navStagger() {
+    var items = document.querySelectorAll('.nav-stagger-item');
+    if (!items.length) return;
+
+    // Reduced motion — show everything immediately
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      items.forEach(function(el) { el.classList.add('nav-stagger-active'); });
+      return;
+    }
+
+    // Force a unified transition (override Tailwind's transition-all on the CTA)
+    items.forEach(function(el) {
+      el.style.transition = 'opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    });
+
+    // Wait for brand reveal to fully finish (overlay fades out at ~5.1s)
+    setTimeout(function() {
+      items.forEach(function(el, i) {
+        setTimeout(function() {
+          el.classList.add('nav-stagger-active');
+        }, i * 200);
+      });
+    }, 5200);
   })();
 
   // ═══════════════════════════════════════════════════════
@@ -1173,7 +1222,7 @@
   });
 
   // ═══════════════════════════════════════════════════════
-  // Hero text animation — Option 3: Blur Reveal
+  // Hero text animation — Option 3: Máscara Lateral (se destapa de izquierda a derecha)
   // ═══════════════════════════════════════════════════════
   (function() {
     var words = document.querySelectorAll('.blur-word');
@@ -1182,7 +1231,7 @@
     window.addEventListener('load', function() {
       setTimeout(function() {
         words.forEach(function(word, i) {
-          word.style.transitionDelay = (i * 0.3) + 's';
+          word.style.animationDelay = (i * 0.3) + 's';
           word.classList.add('animated');
         });
       }, 5200);
@@ -1471,89 +1520,6 @@
       if (e.key === 'Escape' && drawer.classList.contains('active')) closeDrawer();
     });
   })();
-
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-  <script>
-    // ═══════════════════════════════════════════════════════
-    // Smooth Scroll with Locomotive Scroll
-    // ═══════════════════════════════════════════════════════
-    (function() {
-      var hasLS = typeof LocomotiveScroll !== 'undefined';
-      var hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
-
-      if (!hasLS || !hasGSAP) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      // Initialize Locomotive Scroll
-      var scrollContainer = document.querySelector('[data-scroll-container]');
-      if (!scrollContainer) {
-        // Fallback: wrap main content
-        scrollContainer = document.querySelector('main') || document.body;
-      }
-
-      var scrollInstance = new LocomotiveScroll({
-        el: scrollContainer,
-        smooth: true,
-        multiplier: 0.8,
-        lerp: 0.05
-      });
-
-      // Sync with GSAP ScrollTrigger
-      scrollInstance.on('scroll', ScrollTrigger.update);
-      ScrollTrigger.scrollerProxy(scrollContainer, {
-        scrollTop: function(value) {
-          return arguments.length ? scrollInstance.scrollTo(value, 0, 0) : scrollInstance.scroll.instance.scroll.y;
-        },
-        getBoundingClientRect: function() {
-          return { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
-        }
-      });
-
-      ScrollTrigger.addEventListener('refresh', function() { scrollInstance.update(); });
-      ScrollTrigger.refresh();
-
-      // Scroll reveal — simple, uses existing .reveal class
-      // All elements with .reveal start invisible (opacity:0 in CSS)
-      // This animates them in from bottom when they enter viewport
-      document.querySelectorAll('.reveal').forEach(function(el) {
-        gsap.fromTo(el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 90%',
-              toggleActions: 'play none none none'
-            }
-          }
-        );
-      });
-
-      // Speed parallax for images
-      var parallaxEls = document.querySelectorAll('[data-scroll-speed]');
-      parallaxEls.forEach(function(el) {
-        var speed = parseFloat(el.getAttribute('data-scroll-speed')) || 1;
-        var pscroller = scrollInstance ? scrollContainer : window;
-        gsap.to(el, {
-          y: function() { return (1 - speed) * 100; },
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            scroller: pscroller,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        });
-      });
-
-      // Expose for manual use
-      window.__universScroll = scrollInstance;
-    })();
-  </script>
 
 </body></html>
